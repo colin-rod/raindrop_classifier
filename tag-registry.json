@@ -1,0 +1,2014 @@
+{
+  "tags": {
+    "ai": {
+      "category": "general",
+      "usageCount": 40,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "AI",
+        "AI hires",
+        "AI coding",
+        "gen AI tools",
+        "AI models",
+        "AI advancements",
+        "OpenAI",
+        "anthropic",
+        "Scale AI"
+      ]
+    },
+    "app-development": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "app development",
+        "software development",
+        "website building"
+      ]
+    },
+    "leadership-restructuring": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "leadership restructuring",
+        "Zuckerberg"
+      ]
+    },
+    "tech-news": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "tech news",
+        "Valuation",
+        "acquisition",
+        "Leadership Changes"
+      ]
+    },
+    "vibe-coding": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "vibe-coding"
+      ]
+    },
+    "hardware-development": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "hardware development",
+        "safety critical systems"
+      ]
+    },
+    "developer-productivity": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "developer productivity"
+      ]
+    },
+    "data-breach": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "data breach"
+      ]
+    },
+    "app-security": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "app security",
+        "app"
+      ]
+    },
+    "privacy": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "privacy"
+      ]
+    },
+    "technology": {
+      "category": "general",
+      "usageCount": 8,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "technology",
+        "Technology Impact",
+        "tech companies",
+        "AI startups"
+      ]
+    },
+    "food-delivery": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "food delivery",
+        "Chipotle",
+        "drone delivery"
+      ]
+    },
+    "female-friendship": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "friendship",
+        "women"
+      ]
+    },
+    "local-events": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "local events"
+      ]
+    },
+    "sam-altman": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Sam Altman"
+      ]
+    },
+    "space": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Space"
+      ]
+    },
+    "data-centers": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Data Centers"
+      ]
+    },
+    "pilot-program": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "pilot program"
+      ]
+    },
+    "technology-advancements": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "technology advancements",
+        "A.I. Boom",
+        "technology company",
+        "Big Tech"
+      ]
+    },
+    "crypto-industry": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Coinbase",
+        "crypto industry"
+      ]
+    },
+    "AI": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "AI adoption",
+        "AI talent",
+        "language models"
+      ]
+    },
+    "business-decisions": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "business decisions",
+        "Business"
+      ]
+    },
+    "data-analysis": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "data analysis",
+        "Palantir"
+      ]
+    },
+    "hiring": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "hiring",
+        "brain drain"
+      ]
+    },
+    "Silicon-Valley": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Silicon Valley"
+      ]
+    },
+    "dot-com-era": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Dot-Com Era",
+        "Stock Prices"
+      ]
+    },
+    "competition": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "global competition"
+      ]
+    },
+    "Google Search": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Google Search"
+      ]
+    },
+    "podcast": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Podcast"
+      ]
+    },
+    "workers": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "workers",
+        "conditions",
+        "investigation"
+      ]
+    },
+    "Xerox": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Xerox",
+        "photocopy"
+      ]
+    },
+    "wind-surfing": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "windsurf"
+      ]
+    },
+    "metrics": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "metrics",
+        "ARR"
+      ]
+    },
+    "bug-fixing": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "bug fixing",
+        "cursor"
+      ]
+    },
+    "go-to-market strategies": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "go-to-market strategies"
+      ]
+    },
+    "ecosystem": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "ecosystem"
+      ]
+    },
+    "ai-coding": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "AI Coding",
+        "coding strategies",
+        "coding"
+      ]
+    },
+    "ai-spending": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "AI spending",
+        "Cost-effective Solutions",
+        "ROI"
+      ]
+    },
+    "venture-funding": {
+      "category": "general",
+      "usageCount": 8,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "venture capital",
+        "pre-seed funding",
+        "startup"
+      ]
+    },
+    "business-strategy": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "business strategy",
+        "acquisitions"
+      ]
+    },
+    "ai-research": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "GPT-5",
+        "research",
+        "AI supremacy"
+      ]
+    },
+    "community-and-politics": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "community",
+        "politics",
+        "Jobs"
+      ]
+    },
+    "ai-technology": {
+      "category": "general",
+      "usageCount": 6,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "AI technology",
+        "AI chatbot",
+        "DeepMind",
+        "Perplexity",
+        "Nvidia",
+        "AI dystopia"
+      ]
+    },
+    "web-browser": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "web browser",
+        "Google Chrome",
+        "browser extension",
+        "bookmark management"
+      ]
+    },
+    "customer-experience": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Customer Experience",
+        "technology impact"
+      ]
+    },
+    "rental-cars": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Rental Cars"
+      ]
+    },
+    "diplomacy": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "China",
+        "Diplomacy"
+      ]
+    },
+    "cricket": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "cricket"
+      ]
+    },
+    "film-review": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "film review",
+        "Movie Review",
+        "film reviews",
+        "film criticism"
+      ]
+    },
+    "fantasy-sports": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "fantasy sports"
+      ]
+    },
+    "fandom": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "fandom"
+      ]
+    },
+    "crime-drama": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "crime drama"
+      ]
+    },
+    "Hollywood": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Hollywood"
+      ]
+    },
+    "marvel": {
+      "category": "general",
+      "usageCount": 7,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Marvel",
+        "MCU",
+        "Marvel Studios"
+      ]
+    },
+    "reboots": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "reboots"
+      ]
+    },
+    "actors": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "David Corenswet",
+        "actor",
+        "Rob McElhenney"
+      ]
+    },
+    "cyclops": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Cyclops",
+        "Glasses"
+      ]
+    },
+    "box-office": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "box office"
+      ]
+    },
+    "alien": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Alien",
+        "Eyeball Alien",
+        "Facehugger",
+        "Creepy Creatures"
+      ]
+    },
+    "tv-show": {
+      "category": "general",
+      "usageCount": 8,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "TV Show",
+        "Noah Hawley",
+        "Nathan Fielder",
+        "The Rehearsal"
+      ]
+    },
+    "film": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Eternals",
+        "Chloé Zhao",
+        "Bill Burr",
+        "Harrison Ford"
+      ]
+    },
+    "interviews": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "interviews",
+        "billionaires",
+        "cultural-rejection"
+      ]
+    },
+    "culture": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Berghain",
+        "culture",
+        "rejection"
+      ]
+    },
+    "movies": {
+      "category": "general",
+      "usageCount": 8,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "movies",
+        "comic-book movies",
+        "superhero films",
+        "historical drama",
+        "movie credit scenes",
+        "shorts"
+      ]
+    },
+    "superheroes": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "comics",
+        "Doctor Strange",
+        "Fury Road",
+        "magic"
+      ]
+    },
+    "creators": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Matt Shakman",
+        "James Gunn"
+      ]
+    },
+    "TV Review": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "TV Review",
+        "End Credits",
+        "Cameos"
+      ]
+    },
+    "biopic": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "biopic"
+      ]
+    },
+    "founders": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "founders",
+        "VCs"
+      ]
+    },
+    "humor": {
+      "category": "general",
+      "usageCount": 10,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "funny",
+        "comedy",
+        "Conan O'Brien",
+        "television",
+        "YouTube"
+      ]
+    },
+    "racial-equality": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "racial equality",
+        "Lincoln"
+      ]
+    },
+    "ramadan": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "ramadan",
+        "shawarma"
+      ]
+    },
+    "performance-art": {
+      "category": "general",
+      "usageCount": 7,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "music",
+        "performance",
+        "collaboration",
+        "Comedy",
+        "Father Ted"
+      ]
+    },
+    "animation": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "cartoon",
+        "Lynda Carter",
+        "Battle of the Network Stars",
+        "reality show"
+      ]
+    },
+    "video-content": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Streaming",
+        "video content",
+        "fan community"
+      ]
+    },
+    "battles": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "battles",
+        "Fury Road"
+      ]
+    },
+    "humanitarian-award": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Humanitarian Award"
+      ]
+    },
+    "sports": {
+      "category": "general",
+      "usageCount": 6,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Pro Kabaddi League",
+        "sports",
+        "viewership",
+        "women's football",
+        "international tournaments"
+      ]
+    },
+    "social-media": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "TikTok",
+        "social media",
+        "cringe culture"
+      ]
+    },
+    "superman-universe": {
+      "category": "general",
+      "usageCount": 6,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Jimmy Olsen",
+        "Superman"
+      ]
+    },
+    "entertainment": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Skyler Gisondo",
+        "John Goodman",
+        "SNL",
+        "audition"
+      ]
+    },
+    "music": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "rhythm",
+        "grooves"
+      ]
+    },
+    "dc-universe": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "DC Universe",
+        "DC Studios"
+      ]
+    },
+    "film-industry": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.801Z",
+      "variants": [
+        "Film Industry",
+        "Movie News",
+        "film analysis"
+      ]
+    },
+    "tv-shows": {
+      "category": "general",
+      "usageCount": 6,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "TV Shows",
+        "TV shows",
+        "Crossover Episodes",
+        "Abbott Elementary",
+        "It's Always Sunny in Philadelphia"
+      ]
+    },
+    "cultural-commentary": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "New York Times",
+        "Culture",
+        "Ta-Nehisi Coates"
+      ]
+    },
+    "venture-capital": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Venture",
+        "Venture Capital"
+      ]
+    },
+    "business-innovation": {
+      "category": "general",
+      "usageCount": 6,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "business innovation",
+        "entrepreneurship",
+        "capitalism"
+      ]
+    },
+    "work-culture": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "work culture",
+        "staff problems",
+        "management",
+        "corporate structure"
+      ]
+    },
+    "education": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "education",
+        "teen success"
+      ]
+    },
+    "cryptocurrency": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "cryptocurrency"
+      ]
+    },
+    "amazon": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Jeff Bezos",
+        "Amazon"
+      ]
+    },
+    "company-culture": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "company culture",
+        "written memos"
+      ]
+    },
+    "income-inequality": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "income inequality",
+        "executive pay",
+        "CEO compensation",
+        "AFL-CIO"
+      ]
+    },
+    "startup": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "college startups",
+        "Y Combinator",
+        "Startup",
+        "startup advice"
+      ]
+    },
+    "automotive-industry": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Electric Vehicles",
+        "Automotive Industry"
+      ]
+    },
+    "scaling": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "scaling",
+        "scaling businesses"
+      ]
+    },
+    "hustle-culture": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Hustle Culture",
+        "Productivity Myth"
+      ]
+    },
+    "ai-startups": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "AI Startups",
+        "Photoroom"
+      ]
+    },
+    "leadership": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "leadership",
+        "personal growth"
+      ]
+    },
+    "employment": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "employers",
+        "raises",
+        "job mobility"
+      ]
+    },
+    "business-failure": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "business failure",
+        "investor revolt"
+      ]
+    },
+    "politics": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Trump administration",
+        "Sean Duffy"
+      ]
+    },
+    "career-consulting": {
+      "category": "general",
+      "usageCount": 6,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "career consulting",
+        "strategic consulting",
+        "career advice",
+        "hiring advice",
+        "job application",
+        "onboarding"
+      ]
+    },
+    "jobs": {
+      "category": "general",
+      "usageCount": 6,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "jobs",
+        "executives",
+        "CEO",
+        "white-collar",
+        "startups"
+      ]
+    },
+    "wages-and-cost-of-living": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "wages",
+        "cost of living"
+      ]
+    },
+    "profitability": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "profitability",
+        "business analysis"
+      ]
+    },
+    "hypercapitalism": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "hypercapitalism",
+        "talent wars"
+      ]
+    },
+    "social-media-ceo": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Mark Zuckerberg"
+      ]
+    },
+    "real-estate": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "real estate"
+      ]
+    },
+    "job-market": {
+      "category": "general",
+      "usageCount": 7,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "job market",
+        "Job Market",
+        "job prospects",
+        "young workers",
+        "College Graduates"
+      ]
+    },
+    "career-development": {
+      "category": "general",
+      "usageCount": 7,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "personal development",
+        "career protection",
+        "career growth",
+        "professional growth",
+        "daily practices"
+      ]
+    },
+    "automation": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "automation",
+        "red flags"
+      ]
+    },
+    "software-engineering": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "software engineering",
+        "Stanford study"
+      ]
+    },
+    "work-life-balance": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "work-life balance",
+        "mediocrity"
+      ]
+    },
+    "career-preparation": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "career preparation"
+      ]
+    },
+    "criminal-justice": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "crime",
+        "homicide"
+      ]
+    },
+    "governance": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "governance",
+        "CDC",
+        "health agency",
+        "White House",
+        "Trump Tariffs"
+      ]
+    },
+    "geopolitics": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Serbia",
+        "Croatia",
+        "unclaimed land"
+      ]
+    },
+    "events": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Burning Man"
+      ]
+    },
+    "shipping-costs": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Shipping Costs"
+      ]
+    },
+    "global-relations": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Global Relations",
+        "global rich"
+      ]
+    },
+    "dystopia": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "dystopia"
+      ]
+    },
+    "genocide": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "genocide"
+      ]
+    },
+    "political-analysis": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "political analysis"
+      ]
+    },
+    "corruption": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "corruption",
+        "corporate misconduct",
+        "tax evasion",
+        "tax loophole"
+      ]
+    },
+    "business-ethics": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "financial ethics",
+        "business"
+      ]
+    },
+    "Walmart": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Walmart"
+      ]
+    },
+    "london": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "London",
+        "U.K."
+      ]
+    },
+    "economics": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "economics"
+      ]
+    },
+    "trump": {
+      "category": "general",
+      "usageCount": 7,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Trump"
+      ]
+    },
+    "crypto": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "crypto",
+        "Crypto",
+        "DOGE"
+      ]
+    },
+    "finance": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Finance",
+        "holdings",
+        "Profit",
+        "business interests",
+        "savings analysis"
+      ]
+    },
+    "Donald Trump": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Donald Trump",
+        "Trump Family",
+        "Presidency",
+        "controversy"
+      ]
+    },
+    "government efficiency": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "government efficiency",
+        "foreign food aid",
+        "contract terminations"
+      ]
+    },
+    "social issues": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "racism",
+        "sharecropping"
+      ]
+    },
+    "media personalities": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Howard Stern"
+      ]
+    },
+    "investigation": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Investigation",
+        "Crypto Scam",
+        "Money Laundering",
+        "Tether",
+        "Gold Bars"
+      ]
+    },
+    "conspiracy-theories": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "conspiracy theories"
+      ]
+    },
+    "budget-waste": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "budget waste"
+      ]
+    },
+    "wealth-distribution": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "wealth distribution"
+      ]
+    },
+    "regulation": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "regulation",
+        "SEC"
+      ]
+    },
+    "cryptocurrency-companies": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Ripple"
+      ]
+    },
+    "border-security": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "border security"
+      ]
+    },
+    "surveillance": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "surveillance"
+      ]
+    },
+    "space-agency": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "NASA",
+        "Space Agency"
+      ]
+    },
+    "social-media-verification": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "blue check",
+        "Linda Yaccarino"
+      ]
+    },
+    "engineering": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "engineering",
+        "bridge design",
+        "dishwashers"
+      ]
+    },
+    "technology-entrepreneur": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "Palmer Luckey"
+      ]
+    },
+    "suspension": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "suspension"
+      ]
+    },
+    "home-improvement": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "home improvement",
+        "kitchen trends",
+        "smart home",
+        "home automation",
+        "renting"
+      ]
+    },
+    "outdoors": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "outdoors",
+        "hiking",
+        "swimming pools",
+        "recreation"
+      ]
+    },
+    "mental-health": {
+      "category": "general",
+      "usageCount": 6,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "happiness",
+        "mental health",
+        "world happiness report",
+        "sleep",
+        "exercise",
+        "health"
+      ]
+    },
+    "parenting": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "parenting",
+        "youth issues"
+      ]
+    },
+    "sustainability": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "sustainability",
+        "luck"
+      ]
+    },
+    "decision-making": {
+      "category": "general",
+      "usageCount": 3,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "decision making",
+        "heuristics",
+        "overchoice"
+      ]
+    },
+    "child-development": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "child development"
+      ]
+    },
+    "smartphone-use": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "smartphone use"
+      ]
+    },
+    "sleep-optimization": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "sleep optimization"
+      ]
+    },
+    "economy": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "economic trends",
+        "US economy",
+        "economy",
+        "economic impact"
+      ]
+    },
+    "wealth-inequality": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "wealth inequality",
+        "debt",
+        "taxes",
+        "inflation"
+      ]
+    },
+    "consumer-pricing": {
+      "category": "general",
+      "usageCount": 5,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "consumer costs",
+        "airline pricing",
+        "fare buckets",
+        "inventory management",
+        "housing market"
+      ]
+    },
+    "tariffs": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "tariffs",
+        "monopoly money"
+      ]
+    },
+    "meme-coin": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "meme coin",
+        "memecoin"
+      ]
+    },
+    "income-disparity": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "income disparity",
+        "low-income countries"
+      ]
+    },
+    "gdp-per-capita": {
+      "category": "general",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "GDP per capita"
+      ]
+    },
+    "ev-tax-credit": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "EV Tax Credit",
+        "Federal Incentives"
+      ]
+    },
+    "health-issues": {
+      "category": "general",
+      "usageCount": 4,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "obesity",
+        "junk food",
+        "health problems",
+        "Western food companies"
+      ]
+    },
+    "history": {
+      "category": "general",
+      "usageCount": 2,
+      "firstUsed": "2025-09-01T11:28:44.802Z",
+      "variants": [
+        "history",
+        "Berlin"
+      ]
+    },
+    "housing": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:37:42.979Z"
+    },
+    "swiss-co-ops": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:37:42.985Z"
+    },
+    "buying": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:37:42.988Z"
+    },
+    "renting": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2025-09-01T11:37:42.992Z"
+    }
+  },
+  "aliases": {
+    "AI": "ai",
+    "AI hires": "ai",
+    "AI coding": "ai",
+    "gen AI tools": "ai",
+    "AI models": "ai",
+    "AI advancements": "ai",
+    "OpenAI": "ai",
+    "anthropic": "ai",
+    "Scale AI": "ai",
+    "app development": "app-development",
+    "software development": "app-development",
+    "website building": "app-development",
+    "leadership restructuring": "leadership-restructuring",
+    "Zuckerberg": "leadership-restructuring",
+    "TechCrunch": "tech-news",
+    "Meta": "tech-news",
+    "hardware development": "hardware-development",
+    "safety critical systems": "hardware-development",
+    "developer productivity": "developer-productivity",
+    "data breach": "data-breach",
+    "app security": "app-security",
+    "app": "app-security",
+    "Technology": "technology",
+    "Artificial Intelligence": "technology",
+    "AI agents": "technology",
+    "AI reasoning model": "technology",
+    "LLM coding": "technology",
+    "food delivery": "food-delivery",
+    "Chipotle": "food-delivery",
+    "drone delivery": "food-delivery",
+    "friendship": "female-friendship",
+    "women": "female-friendship",
+    "local events": "local-events",
+    "Sam Altman": "sam-altman",
+    "Space": "space",
+    "Data Centers": "data-centers",
+    "pilot program": "pilot-program",
+    "technology advancements": "technology-advancements",
+    "A.I. Boom": "technology-advancements",
+    "technology company": "technology-advancements",
+    "Big Tech": "technology-advancements",
+    "Coinbase": "crypto-industry",
+    "crypto industry": "crypto-industry",
+    "AI adoption": "AI",
+    "AI talent": "AI",
+    "language models": "AI",
+    "business decisions": "business-decisions",
+    "Business": "business-decisions",
+    "data analysis": "data-analysis",
+    "Palantir": "data-analysis",
+    "brain drain": "hiring",
+    "Silicon Valley": "Silicon-Valley",
+    "Dot-Com Era": "dot-com-era",
+    "Stock Prices": "dot-com-era",
+    "Technology Impact": "technology",
+    "tech companies": "technology",
+    "AI startups": "technology",
+    "global competition": "competition",
+    "Podcast": "podcast",
+    "conditions": "workers",
+    "investigation": "workers",
+    "photocopy": "Xerox",
+    "windsurf": "wind-surfing",
+    "ARR": "metrics",
+    "bug fixing": "bug-fixing",
+    "cursor": "bug-fixing",
+    "AI Coding": "ai-coding",
+    "coding strategies": "ai-coding",
+    "coding": "ai-coding",
+    "AI spending": "ai-spending",
+    "Cost-effective Solutions": "ai-spending",
+    "ROI": "ai-spending",
+    "venture capital": "venture-funding",
+    "pre-seed funding": "venture-funding",
+    "startup": "venture-funding",
+    "business strategy": "business-strategy",
+    "acquisitions": "business-strategy",
+    "GPT-5": "ai-research",
+    "research": "ai-research",
+    "AI supremacy": "ai-research",
+    "community": "community-and-politics",
+    "politics": "community-and-politics",
+    "Jobs": "community-and-politics",
+    "AI technology": "ai-technology",
+    "AI chatbot": "ai-technology",
+    "DeepMind": "ai-technology",
+    "Perplexity": "ai-technology",
+    "Nvidia": "ai-technology",
+    "AI dystopia": "ai-technology",
+    "web browser": "web-browser",
+    "Google Chrome": "web-browser",
+    "browser extension": "web-browser",
+    "bookmark management": "web-browser",
+    "Customer Experience": "customer-experience",
+    "technology impact": "customer-experience",
+    "Rental Cars": "rental-cars",
+    "China": "diplomacy",
+    "Diplomacy": "diplomacy",
+    "film review": "film-review",
+    "Movie Review": "film-review",
+    "film reviews": "film-review",
+    "film criticism": "film-review",
+    "fantasy sports": "fantasy-sports",
+    "crime drama": "crime-drama",
+    "Marvel": "marvel",
+    "MCU": "marvel",
+    "Marvel Studios": "marvel",
+    "Darren Aronofsky": "actors",
+    "Austin Butler": "actors",
+    "Zoe Kravitz": "actors",
+    "James Marsden": "actors",
+    "Timothy Olyphant": "actors",
+    "Cyclops": "cyclops",
+    "Glasses": "cyclops",
+    "box office": "box-office",
+    "Alien": "alien",
+    "Eyeball Alien": "alien",
+    "Facehugger": "alien",
+    "Creepy Creatures": "alien",
+    "TV Show": "tv-show",
+    "Noah Hawley": "tv-show",
+    "Nathan Fielder": "tv-show",
+    "The Rehearsal": "tv-show",
+    "Eternals": "film",
+    "Chloé Zhao": "film",
+    "Bill Burr": "film",
+    "Harrison Ford": "film",
+    "billionaires": "interviews",
+    "cultural-rejection": "interviews",
+    "Berghain": "culture",
+    "rejection": "culture",
+    "film": "movies",
+    "box office flop": "movies",
+    "Fantastic Four": "superheroes",
+    "Peacemaker": "superheroes",
+    "DCU": "superheroes",
+    "Marvel Cinematic Universe": "superheroes",
+    "Acting": "superheroes",
+    "Matt Shakman": "creators",
+    "James Gunn": "creators",
+    "End Credits": "TV Review",
+    "Cameos": "TV Review",
+    "celebrity": "actors",
+    "VCs": "founders",
+    "comic-book movies": "movies",
+    "superhero films": "movies",
+    "historical drama": "movies",
+    "movie credit scenes": "movies",
+    "shorts": "movies",
+    "funny": "humor",
+    "comedy": "humor",
+    "Conan O'Brien": "humor",
+    "television": "humor",
+    "YouTube": "humor",
+    "racial equality": "racial-equality",
+    "Lincoln": "racial-equality",
+    "shawarma": "ramadan",
+    "comics": "superheroes",
+    "Doctor Strange": "superheroes",
+    "Fury Road": "battles",
+    "magic": "superheroes",
+    "music": "performance-art",
+    "performance": "performance-art",
+    "collaboration": "performance-art",
+    "Comedy": "performance-art",
+    "Father Ted": "performance-art",
+    "cartoon": "animation",
+    "Lynda Carter": "animation",
+    "Battle of the Network Stars": "animation",
+    "reality show": "animation",
+    "Streaming": "video-content",
+    "video content": "video-content",
+    "fan community": "video-content",
+    "Humanitarian Award": "humanitarian-award",
+    "Pro Kabaddi League": "sports",
+    "viewership": "sports",
+    "women's football": "sports",
+    "international tournaments": "sports",
+    "TikTok": "social-media",
+    "social media": "social-media",
+    "cringe culture": "social-media",
+    "Jimmy Olsen": "superman-universe",
+    "Superman": "superman-universe",
+    "Skyler Gisondo": "entertainment",
+    "John Goodman": "entertainment",
+    "SNL": "entertainment",
+    "audition": "entertainment",
+    "rhythm": "music",
+    "grooves": "music",
+    "DC Universe": "dc-universe",
+    "DC Studios": "dc-universe",
+    "Film Industry": "film-industry",
+    "Movie News": "film-industry",
+    "film analysis": "film-industry",
+    "TV Shows": "tv-shows",
+    "TV shows": "tv-shows",
+    "Crossover Episodes": "tv-shows",
+    "Abbott Elementary": "tv-shows",
+    "It's Always Sunny in Philadelphia": "tv-shows",
+    "David Corenswet": "actors",
+    "actor": "actors",
+    "Rob McElhenney": "actors",
+    "New York Times": "cultural-commentary",
+    "Culture": "cultural-commentary",
+    "Ta-Nehisi Coates": "cultural-commentary",
+    "Venture": "venture-capital",
+    "Venture Capital": "venture-capital",
+    "business innovation": "business-innovation",
+    "entrepreneurship": "business-innovation",
+    "capitalism": "business-innovation",
+    "work culture": "work-culture",
+    "staff problems": "work-culture",
+    "management": "work-culture",
+    "corporate structure": "work-culture",
+    "teen success": "education",
+    "Cryptocurrency": "cryptocurrency",
+    "Deeptech": "cryptocurrency",
+    "Jeff Bezos": "amazon",
+    "Amazon": "amazon",
+    "company culture": "company-culture",
+    "written memos": "company-culture",
+    "income inequality": "income-inequality",
+    "executive pay": "income-inequality",
+    "CEO compensation": "income-inequality",
+    "AFL-CIO": "income-inequality",
+    "college startups": "startup",
+    "Y Combinator": "startup",
+    "Startup": "startup",
+    "startup advice": "startup",
+    "Electric Vehicles": "automotive-industry",
+    "Automotive Industry": "automotive-industry",
+    "tech news": "tech-news",
+    "Valuation": "tech-news",
+    "acquisition": "tech-news",
+    "Leadership Changes": "tech-news",
+    "scaling businesses": "scaling",
+    "Hustle Culture": "hustle-culture",
+    "Productivity Myth": "hustle-culture",
+    "AI Startups": "ai-startups",
+    "Photoroom": "ai-startups",
+    "Leadership": "leadership",
+    "team dynamics": "leadership",
+    "Job Opportunities": "employment",
+    "entlassungen": "employment",
+    "arbeitsplatzabbau": "employment",
+    "N26": "employment",
+    "Lieferando": "employment",
+    "Hamburg": "employment",
+    "business failure": "business-failure",
+    "investor revolt": "business-failure",
+    "Trump Jr.": "politics",
+    "gun industry": "politics",
+    "career consulting": "career-consulting",
+    "strategic consulting": "career-consulting",
+    "career advice": "career-consulting",
+    "hiring advice": "career-consulting",
+    "job application": "career-consulting",
+    "onboarding": "career-consulting",
+    "executives": "jobs",
+    "CEO": "jobs",
+    "white-collar": "jobs",
+    "startups": "jobs",
+    "wages": "wages-and-cost-of-living",
+    "cost of living": "wages-and-cost-of-living",
+    "business analysis": "profitability",
+    "talent wars": "hypercapitalism",
+    "Mark Zuckerberg": "social-media-ceo",
+    "real estate": "real-estate",
+    "job market": "job-market",
+    "Job Market": "job-market",
+    "job prospects": "job-market",
+    "young workers": "job-market",
+    "College Graduates": "job-market",
+    "personal development": "career-development",
+    "career protection": "career-development",
+    "career growth": "career-development",
+    "professional growth": "career-development",
+    "daily practices": "career-development",
+    "red flags": "automation",
+    "software engineering": "software-engineering",
+    "Stanford study": "software-engineering",
+    "work-life balance": "work-life-balance",
+    "mediocrity": "work-life-balance",
+    "career preparation": "career-preparation",
+    "personal growth": "leadership",
+    "crime": "criminal-justice",
+    "homicide": "criminal-justice",
+    "CDC": "governance",
+    "health agency": "governance",
+    "White House": "governance",
+    "Trump Tariffs": "governance",
+    "Serbia": "geopolitics",
+    "Croatia": "geopolitics",
+    "unclaimed land": "geopolitics",
+    "Burning Man": "events",
+    "Shipping Costs": "shipping-costs",
+    "Global Relations": "global-relations",
+    "global rich": "global-relations",
+    "political analysis": "political-analysis",
+    "corporate misconduct": "corruption",
+    "tax evasion": "corruption",
+    "tax loophole": "corruption",
+    "financial ethics": "business-ethics",
+    "business": "business-ethics",
+    "London": "london",
+    "U.K.": "london",
+    "Trump": "trump",
+    "Crypto": "crypto",
+    "DOGE": "crypto",
+    "Finance": "finance",
+    "holdings": "finance",
+    "Profit": "finance",
+    "business interests": "finance",
+    "savings analysis": "finance",
+    "Trump Family": "Donald Trump",
+    "Presidency": "Donald Trump",
+    "controversy": "Donald Trump",
+    "foreign food aid": "investigation",
+    "contract terminations": "government efficiency",
+    "racism": "social issues",
+    "sharecropping": "social issues",
+    "Howard Stern": "media personalities",
+    "Senate report": "investigation",
+    "conspiracy theories": "conspiracy-theories",
+    "budget waste": "budget-waste",
+    "Trump administration": "politics",
+    "Sean Duffy": "politics",
+    "wealth distribution": "wealth-distribution",
+    "SEC": "regulation",
+    "Ripple": "cryptocurrency-companies",
+    "border security": "border-security",
+    "NASA": "space-agency",
+    "Space Agency": "space-agency",
+    "blue check": "social-media-verification",
+    "Linda Yaccarino": "social-media-verification",
+    "bridge design": "engineering",
+    "dishwashers": "engineering",
+    "Palmer Luckey": "technology-entrepreneur",
+    "home improvement": "home-improvement",
+    "kitchen trends": "home-improvement",
+    "smart home": "home-improvement",
+    "home automation": "home-improvement",
+    "renting": "home-improvement",
+    "hiking": "outdoors",
+    "swimming pools": "outdoors",
+    "recreation": "outdoors",
+    "happiness": "mental-health",
+    "mental health": "mental-health",
+    "world happiness report": "mental-health",
+    "sleep": "mental-health",
+    "exercise": "mental-health",
+    "health": "mental-health",
+    "youth issues": "parenting",
+    "luck": "sustainability",
+    "decision making": "decision-making",
+    "heuristics": "decision-making",
+    "overchoice": "decision-making",
+    "child development": "child-development",
+    "smartphone use": "smartphone-use",
+    "sleep optimization": "sleep-optimization",
+    "Investigation": "investigation",
+    "Crypto Scam": "investigation",
+    "Money Laundering": "investigation",
+    "Tether": "investigation",
+    "Gold Bars": "investigation",
+    "economic trends": "economy",
+    "US economy": "economy",
+    "economic impact": "economy",
+    "wealth inequality": "wealth-inequality",
+    "debt": "wealth-inequality",
+    "taxes": "wealth-inequality",
+    "inflation": "wealth-inequality",
+    "employers": "employment",
+    "raises": "employment",
+    "job mobility": "employment",
+    "consumer costs": "consumer-pricing",
+    "airline pricing": "consumer-pricing",
+    "fare buckets": "consumer-pricing",
+    "inventory management": "consumer-pricing",
+    "housing market": "consumer-pricing",
+    "monopoly money": "tariffs",
+    "meme coin": "meme-coin",
+    "memecoin": "meme-coin",
+    "income disparity": "income-disparity",
+    "low-income countries": "income-disparity",
+    "GDP per capita": "gdp-per-capita",
+    "EV Tax Credit": "ev-tax-credit",
+    "Federal Incentives": "ev-tax-credit",
+    "obesity": "health-issues",
+    "junk food": "health-issues",
+    "health problems": "health-issues",
+    "Western food companies": "health-issues",
+    "Berlin": "history"
+  },
+  "lastUpdated": "2025-09-01T11:37:42.992Z"
+}
