@@ -149,6 +149,96 @@ class TagManager {
       .slice(0, limit)
       .map(([tag, data]) => ({ tag, count: data.usageCount }));
   }
+
+  getPopularTagsByCategory(category, limit = 10) {
+    return Object.entries(this.registry.tags)
+      .filter(([, data]) => data.category === category)
+      .sort(([,a], [,b]) => b.usageCount - a.usageCount)
+      .slice(0, limit)
+      .map(([tag, data]) => ({ tag, count: data.usageCount }));
+  }
+
+  getCombinedTagContext(category, globalLimit = 8, categoryLimit = 7) {
+    const globalTags = this.getPopularTags(globalLimit);
+    const categoryTags = this.getPopularTagsByCategory(category, categoryLimit);
+    
+    // Remove duplicates, prefer category-specific tags
+    const categoryTagNames = new Set(categoryTags.map(t => t.tag));
+    const uniqueGlobalTags = globalTags.filter(t => !categoryTagNames.has(t.tag));
+    
+    return {
+      categoryTags,
+      globalTags: uniqueGlobalTags,
+      combined: [...categoryTags, ...uniqueGlobalTags]
+    };
+  }
+}
+
+// Detect content type from URL and title
+function detectContentType(bookmark) {
+  const { title = '', link = '', excerpt = '' } = bookmark;
+  const titleLower = title.toLowerCase();
+  const linkLower = link.toLowerCase();
+  const textContent = `${titleLower} ${excerpt}`.toLowerCase();
+  
+  // Tool/Software detection
+  if (linkLower.includes('github.com') || 
+      linkLower.includes('tools.') ||
+      titleLower.includes('tool') ||
+      titleLower.includes('app') ||
+      titleLower.includes('software') ||
+      textContent.includes('download') ||
+      textContent.includes('install')) {
+    return 'tool';
+  }
+  
+  // Tutorial/Guide detection
+  if (titleLower.includes('tutorial') ||
+      titleLower.includes('guide') ||
+      titleLower.includes('how to') ||
+      titleLower.includes('step by step') ||
+      titleLower.includes('walkthrough') ||
+      textContent.includes('learn') ||
+      textContent.includes('beginner')) {
+    return 'tutorial';
+  }
+  
+  // Video detection
+  if (linkLower.includes('youtube.com') ||
+      linkLower.includes('vimeo.com') ||
+      linkLower.includes('twitch.tv') ||
+      titleLower.includes('video') ||
+      titleLower.includes('watch') ||
+      titleLower.includes('episode')) {
+    return 'video';
+  }
+  
+  // Documentation detection
+  if (linkLower.includes('docs.') ||
+      linkLower.includes('/docs/') ||
+      linkLower.includes('documentation') ||
+      titleLower.includes('documentation') ||
+      titleLower.includes('reference') ||
+      titleLower.includes('api') ||
+      textContent.includes('official docs')) {
+    return 'documentation';
+  }
+  
+  // News/Article detection (default)
+  return 'article';
+}
+
+// Get content-specific tag instructions
+function getContentTypeInstructions(contentType) {
+  const instructions = {
+    article: 'Focus on topic, publication, and subject matter tags',
+    tool: 'Include "tool" or "software" tag plus functionality and technology tags',
+    tutorial: 'Add "tutorial" or "guide" tag plus skill level and technology tags',
+    video: 'Include "video" tag plus platform, topic, and format tags',
+    documentation: 'Add "docs" or "reference" tag plus technology and purpose tags'
+  };
+  
+  return instructions[contentType] || instructions.article;
 }
 
 // Fetch all unsorted bookmarks (from collection -1)
@@ -176,48 +266,81 @@ async function fetchAllUnsortedBookmarks() {
   return all.filter(bookmark => bookmark.collection.$id === -1);
 }
 
-// Ask GPT to suggest a category + tags
+// Ask GPT to suggest a category + tags (two-pass approach)
 async function classifyBookmark(bookmark, tagManager) {
   await tagManager.loadTags();
   
-  // Get popular tags to guide AI suggestions
-  const popularTags = tagManager.getPopularTags(15);
-  const popularTagsList = popularTags.map(t => t.tag).join(", ");
+  // First pass: Detect category and content type
+  const contentType = detectContentType(bookmark);
+  const contentInstructions = getContentTypeInstructions(contentType);
   
-  const prompt = `Classify the following bookmark into one of these categories:
+  const categoryPrompt = `Classify the following bookmark into one of these categories:
 ${Object.keys(COLLECTIONS).join(", ")}
 
 Bookmark:
 - Title: ${bookmark.title}
 - Excerpt: ${bookmark.excerpt || "N/A"}
 - Link: ${bookmark.link}
-
-${popularTags.length > 0 ? `Popular existing tags to consider reusing: ${popularTagsList}
-
-` : ''}Tag Guidelines:
-- Use lowercase with hyphens (e.g., "machine-learning", "web-development")
-- Reuse existing popular tags when possible
-- Keep tags concise and descriptive
-- Maximum 5 tags per bookmark
+- Content Type: ${contentType}
 
 Return JSON only:
-{"category": "...", "tags": ["tag1", "tag2"]}`;
+{"category": "..."}`;
 
-  const resp = await client.chat.completions.create({
+  const categoryResp = await client.chat.completions.create({
     model: "gpt-4o-mini",
-    messages: [{ role: "user", content: prompt }],
+    messages: [{ role: "user", content: categoryPrompt }],
     response_format: { type: "json_object" },
   });
 
-  const parsed = JSON.parse(resp.choices[0].message.content);
+  const { category } = JSON.parse(categoryResp.choices[0].message.content);
+  
+  // Second pass: Get dynamic tag context and generate tags
+  const tagContext = tagManager.getCombinedTagContext(category);
+  const categoryTagsList = tagContext.categoryTags.map(t => `${t.tag} (${t.count}×)`).join(", ");
+  const globalTagsList = tagContext.globalTags.map(t => `${t.tag} (${t.count}×)`).join(", ");
+  
+  const tagPrompt = `Generate tags for this ${contentType} in the "${category}" category:
+
+Bookmark:
+- Title: ${bookmark.title}
+- Excerpt: ${bookmark.excerpt || "N/A"}
+- Link: ${bookmark.link}
+
+${categoryTagsList ? `Popular tags in "${category}": ${categoryTagsList}
+
+` : ''}${globalTagsList ? `Popular global tags: ${globalTagsList}
+
+` : ''}Content-Specific Guidance: ${contentInstructions}
+
+Tag Guidelines:
+- Use 3-5 tags per bookmark (prefer 3-4 unless content is very broad)
+- Use lowercase with hyphens (e.g., "machine-learning", "web-development")
+- Prioritize reusing existing popular tags when relevant
+- Keep tags concise and descriptive
+- Avoid redundant or overly generic tags
+- ${contentType === 'tool' ? 'Include functionality and technology tags' : ''}
+- ${contentType === 'tutorial' ? 'Include skill level and learning-related tags' : ''}
+- ${contentType === 'video' ? 'Include platform and format tags' : ''}
+
+Good examples: ["react", "frontend", "tutorial"] or ["ai", "machine-learning", "tool"]
+Avoid: ["general", "interesting", "good", "useful"]
+
+Return JSON only:
+{"tags": ["tag1", "tag2", "tag3"]}`;
+
+  const tagResp = await client.chat.completions.create({
+    model: "gpt-4o-mini",
+    messages: [{ role: "user", content: tagPrompt }],
+    response_format: { type: "json_object" },
+  });
+
+  const { tags } = JSON.parse(tagResp.choices[0].message.content);
   
   // Process tags through TagManager
-  if (parsed.tags && Array.isArray(parsed.tags)) {
-    parsed.tags = tagManager.processAITags(parsed.tags, parsed.category);
-    await tagManager.saveTags();
-  }
+  const processedTags = tagManager.processAITags(tags || [], category);
+  await tagManager.saveTags();
   
-  return parsed;
+  return { category, tags: processedTags, contentType };
 }
 
 // Move + update the bookmark in Raindrop
@@ -277,10 +400,11 @@ async function main() {
   for (const bookmark of bookmarks) {
     console.log(`🔎 Classifying: ${bookmark.title}`);
 
-    const { category, tags } = await classifyBookmark(bookmark, tagManager);
+    const { category, tags, contentType } = await classifyBookmark(bookmark, tagManager);
 
-    console.log(` → Suggested category: ${category}`);
-    console.log(` → Processed tags: ${tags.join(", ")}\n`);
+    console.log(` → Content type: ${contentType}`);
+    console.log(` → Category: ${category}`);
+    console.log(` → Tags: ${tags.join(", ")}\n`);
 
     await updateBookmark(bookmark, category, tags);
 
