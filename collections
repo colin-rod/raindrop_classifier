@@ -1,0 +1,11 @@
+const COLLECTIONS = {
+  "AI & Technology": 59437707,
+  "Entertainment & Media": 59437708,
+  "Business & Startups": 59437709,
+  "Career & Professional Development": 59437710,
+  "Politics & Current Affairs": 59437711,
+  "Lifestyle & Practical": 59437712,
+  "Finance & Economics": 59437713,
+  "Global & Cultural": 59437715,
+  "Others":59437777
+};

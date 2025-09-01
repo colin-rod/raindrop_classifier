@@ -1,0 +1,20 @@
+{
+  "name": "raindrop-classifier",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "node classify.js",
+    "classify": "node classify.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.1",
+    "node-fetch": "^3.3.2",
+    "openai": "^4.104.0"
+  },
+  "description": "Automatically tags and categorizes your Raindrop.io bookmarks using OpenAI GPT-4o-mini.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}

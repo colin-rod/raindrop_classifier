@@ -1,0 +1,30 @@
+name: Classify Raindrop Bookmarks
+
+on:
+  schedule:
+    # Run daily at 3:00 AM UTC (same as your current Vercel cron)
+    - cron: '0 3 * * *'
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  classify:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm ci
+      
+    - name: Run bookmark classification
+      run: node classify.js
+      env:
+        RAINDROP_TOKEN: ${{ secrets.RAINDROP_TOKEN }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
