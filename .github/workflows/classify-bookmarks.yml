@@ -28,7 +28,13 @@ jobs:
       env:
         RAINDROP_TOKEN: ${{ secrets.RAINDROP_TOKEN }}
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-        
+
+    - name: Run weekly tag cleanup
+      run: node cleanup-existing-tags.js
+      env:
+        RAINDROP_TOKEN: ${{ secrets.RAINDROP_TOKEN }}
+        OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
     - name: Send Telegram notification
       if: always()
       run: |
