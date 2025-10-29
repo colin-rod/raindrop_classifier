@@ -60,7 +60,7 @@ async function fetchAllBookmarksWithTags() {
 function extractAllTags(bookmarks) {
   const tagSet = new Set();
   const tagUsage = new Map();
-  
+
   bookmarks.forEach(bookmark => {
     if (bookmark.tags && bookmark.tags.length > 0) {
       bookmark.tags.forEach(tag => {
@@ -69,8 +69,117 @@ function extractAllTags(bookmarks) {
       });
     }
   });
-  
+
   return { uniqueTags: Array.from(tagSet), tagUsage };
+}
+
+const METRIC_THRESHOLDS = {
+  growthRate: 0.1,
+  newTagRatio: 0.15,
+  singleUseRatio: 0.3,
+  entropy: 3.0,
+};
+
+async function shouldRunCleanup(currentUniqueTags, currentTagUsage) {
+  const uniqueCount = currentUniqueTags.length;
+  const totalUsage = Array.from(currentTagUsage.values()).reduce((sum, count) => sum + count, 0);
+
+  let registry;
+  let registryMissing = false;
+
+  try {
+    const registryRaw = await fs.readFile('tag-registry.json', 'utf8');
+    registry = JSON.parse(registryRaw);
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      console.log('📁 No existing tag registry found. Defaulting to cleanup.');
+      registryMissing = true;
+      registry = { tags: {}, aliases: {} };
+    } else {
+      throw error;
+    }
+  }
+
+  const existingTags = registry?.tags && typeof registry.tags === 'object' ? registry.tags : {};
+  const existingAliases = registry?.aliases && typeof registry.aliases === 'object' ? registry.aliases : {};
+
+  const previousUniqueCount = Object.keys(existingTags).length;
+  const knownTags = new Set([
+    ...Object.keys(existingTags),
+    ...Object.keys(existingAliases),
+  ]);
+
+  const newTagCount = currentUniqueTags.filter(tag => !knownTags.has(tag)).length;
+  const growthRate = previousUniqueCount > 0
+    ? (uniqueCount - previousUniqueCount) / previousUniqueCount
+    : uniqueCount > 0 ? 1 : 0;
+  const newTagRatio = uniqueCount > 0 ? newTagCount / uniqueCount : 0;
+  const singleUseCount = Array.from(currentTagUsage.values()).filter(count => count === 1).length;
+  const singleUseRatio = uniqueCount > 0 ? singleUseCount / uniqueCount : 0;
+  const entropy = totalUsage > 0
+    ? -Array.from(currentTagUsage.values()).reduce((sum, count) => {
+        const p = count / totalUsage;
+        return p > 0 ? sum + p * Math.log2(p) : sum;
+      }, 0)
+    : 0;
+
+  console.log('🧮 Tag health metrics:');
+  console.log(`   Previous unique tags: ${previousUniqueCount}`);
+  console.log(`   Current unique tags: ${uniqueCount}`);
+  console.log(`   Total tag usage: ${totalUsage}`);
+  console.log(`   Growth rate: ${(growthRate * 100).toFixed(2)}% (threshold ${(METRIC_THRESHOLDS.growthRate * 100).toFixed(0)}%)`);
+  console.log(`   New-tag ratio: ${(newTagRatio * 100).toFixed(2)}% (threshold ${(METRIC_THRESHOLDS.newTagRatio * 100).toFixed(0)}%)`);
+  console.log(`   Single-use ratio: ${(singleUseRatio * 100).toFixed(2)}% (threshold ${(METRIC_THRESHOLDS.singleUseRatio * 100).toFixed(0)}%)`);
+  console.log(`   Entropy: ${entropy.toFixed(2)} (threshold ${METRIC_THRESHOLDS.entropy.toFixed(2)})`);
+
+  const metricsEntry = {
+    timestamp: new Date().toISOString(),
+    previousUniqueTagCount: previousUniqueCount,
+    uniqueTagCount: uniqueCount,
+    totalTagUsage: totalUsage,
+    newTagCount,
+    growthRate,
+    newTagRatio,
+    singleUseRatio,
+    entropy,
+  };
+
+  try {
+    let history = [];
+    try {
+      const historyRaw = await fs.readFile('tag-metrics.json', 'utf8');
+      history = JSON.parse(historyRaw);
+      if (!Array.isArray(history)) {
+        history = [];
+      }
+    } catch (historyError) {
+      if (historyError.code !== 'ENOENT') {
+        throw historyError;
+      }
+    }
+
+    history.push(metricsEntry);
+    await fs.writeFile('tag-metrics.json', JSON.stringify(history, null, 2));
+  } catch (writeError) {
+    console.error('⚠️  Failed to persist tag metrics:', writeError);
+  }
+
+  if (registryMissing) {
+    return true;
+  }
+
+  const shouldRun = (
+    growthRate >= METRIC_THRESHOLDS.growthRate ||
+    newTagRatio >= METRIC_THRESHOLDS.newTagRatio ||
+    singleUseRatio >= METRIC_THRESHOLDS.singleUseRatio ||
+    entropy <= METRIC_THRESHOLDS.entropy
+  );
+
+  console.log(shouldRun
+    ? '✅ Cleanup criteria met — proceeding with AI cleanup.'
+    : 'ℹ️ Cleanup thresholds not met — skipping AI cleanup.');
+
+  return shouldRun;
 }
 
 // Use AI to group similar tags and suggest consolidation
@@ -224,6 +333,12 @@ async function main() {
   
   // Step 2: Extract and analyze tags
   const { uniqueTags, tagUsage } = extractAllTags(bookmarks);
+
+  if (!await shouldRunCleanup(uniqueTags, tagUsage)) {
+    console.log('⏭️ Skipping AI cleanup this week.');
+    process.exit(0);
+  }
+
   console.log(`Found ${uniqueTags.length} unique tags`);
   console.log(`Top 10 most used tags: ${Array.from(tagUsage.entries())
     .sort((a, b) => b[1] - a[1])
