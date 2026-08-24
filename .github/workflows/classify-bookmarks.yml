@@ -34,13 +34,3 @@ jobs:
       env:
         RAINDROP_TOKEN: ${{ secrets.RAINDROP_TOKEN }}
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-
-    - name: Send Telegram notification
-      if: always()
-      run: |
-        STATUS="${{ job.status == 'success' && '✅ completed successfully' || '❌ failed' }}"
-        MESSAGE="🤖 *Raindrop Classification Update*%0A%0AWorkflow has $STATUS%0A%0A📁 Repository: ${{ github.repository }}%0A🕒 Time: $(date)%0A%0A🔗 [View Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
-        curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
-          -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
-          -d text="$MESSAGE" \
-          -d parse_mode="Markdown"
