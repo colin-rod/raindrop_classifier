@@ -4,7 +4,7 @@ import fs from 'fs/promises';
 import { RaindropClient, sleep } from './raindrop-api.js';
 import {
   normalizeTag, lexicalGroups, circuitBreaker,
-  plannedReverts, revertTags,
+  plannedReverts, revertTags, sanitiseGroups, updateRegistry,
 } from './tag-utils.js';
 
 // Weekly tag consolidation across the whole account.
@@ -93,25 +93,36 @@ For each tag in "TAGS TO DECIDE ON", decide whether it is a true synonym of
 another tag. The canonical you choose may be ANY tag from the full vocabulary,
 not just from this batch.
 
-Merge ONLY true synonyms — different names for the same concept:
+A synonym means the two tags name THE SAME THING. If you would ever want to
+filter on one but not the other, they are not synonyms.
+
   ✅ "crypto" + "cryptocurrency" + "crypto-industry" → "crypto"
   ✅ "job-market" + "jobs" + "employment" → "jobs"
   ✅ "tv-show" + "tv-shows" → "tv-shows"
+  ✅ "data-analysis" + "data-analytics" → whichever is used more
 
 Do NOT merge related-but-distinct concepts, or a specific thing into its
-general category:
-  ❌ "marvel" + "movies"        (a franchise is not the medium)
-  ❌ "ai-coding" + "ai"         (a subtopic is not its parent)
-  ❌ "london" + "geopolitics"   (merely related)
-  ❌ "privacy" + "surveillance" (adjacent, not the same)
+general category. These are all real mistakes made on this vocabulary:
+  ❌ "artificial-intelligence" → "art"   (a prefix match is not a meaning match)
+  ❌ "video-games" → "video"             (a genre is not the medium)
+  ❌ "risk-management" → "security"      (related, not the same)
+  ❌ "software" → "software-development" (a field is not its subject)
+  ❌ "marvel" → "movies"                 (a franchise is not the medium)
+  ❌ "ai-coding" → "ai"                  (a subtopic is not its parent)
 
+Never merge a tag into one that shares only a prefix or substring.
+Never merge a more-used tag into a less-used one — the canonical must be the
+tag with the HIGHER usage count shown above.
 Keep named entities (people, companies, franchises) separate unless they are
 genuinely the same entity spelled differently.
-Prefer the higher-usage tag as canonical. Use lowercase-with-hyphens.
-A tag with no true synonym should simply be omitted from your answer.
+Use lowercase-with-hyphens. A tag with no true synonym must be omitted entirely.
+
+For every group set "relation" to "synonym" only if the tags name the same
+thing. If the tags are merely related, adjacent, or one is a subtopic of the
+other, do not include the group at all.
 
 Return JSON only:
-{"groups": [{"canonical": "crypto", "variants": ["cryptocurrency"], "reason": "same concept"}]}`;
+{"groups": [{"canonical": "crypto", "variants": ["cryptocurrency"], "relation": "synonym", "reason": "same concept"}]}`;
 
     const resp = await client.chat.completions.create({
       model: "gpt-4o-mini",
@@ -122,7 +133,7 @@ Return JSON only:
     const parsed = JSON.parse(resp.choices[0].message.content);
     for (const g of parsed.groups || []) {
       if (!g?.canonical || !Array.isArray(g.variants)) continue;
-      groups.push(g);
+      groups.push({ ...g, relation: g.relation, reason: g.reason });
     }
 
     console.log(`   batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(sorted.length / batchSize)}`);
@@ -130,84 +141,6 @@ Return JSON only:
   }
 
   return groups;
-}
-
-/**
- * Drop anything the model proposed that we cannot justify: self-merges,
- * variants it invented, and merges that would contradict an earlier group.
- * The model is advisory here; this function is what actually decides.
- */
-function sanitiseGroups(groups, counts) {
-  const known = new Set(counts.keys());
-  const claimed = new Set();
-  const clean = [];
-
-  for (const group of groups) {
-    const canonical = normalizeTag(group.canonical);
-    if (!canonical) continue;
-
-    const variants = [...new Set(group.variants.map(String))]
-      .filter(v => known.has(v))            // must be a tag that really exists
-      .filter(v => v !== canonical)          // no self-merge
-      .filter(v => !claimed.has(v));         // first group to claim a tag wins
-
-    if (!variants.length) continue;
-    if (claimed.has(canonical)) continue;    // canonical already merged away
-
-    for (const v of variants) claimed.add(v);
-    clean.push({
-      canonical,
-      variants,
-      totalUses: variants.reduce((s, v) => s + (counts.get(v) || 0), 0) + (counts.get(canonical) || 0),
-      reason: group.reason || 'synonym',
-    });
-  }
-
-  return clean;
-}
-
-// ---------------------------------------------------------------------------
-// Registry
-// ---------------------------------------------------------------------------
-
-/**
- * Fold this run into the existing registry instead of rebuilding it. The old
- * implementation wrote a fresh object every time, so usageCount and firstUsed
- * were reset on every run and nothing ever accumulated.
- */
-function updateRegistry(registry, groups, counts, categoryOf) {
-  const now = new Date().toISOString();
-  registry.tags ||= {};
-  registry.aliases ||= {};
-
-  for (const { canonical, variants } of groups) {
-    const existing = registry.tags[canonical];
-    const uses = (counts.get(canonical) || 0) +
-      variants.reduce((s, v) => s + (counts.get(v) || 0), 0);
-
-    registry.tags[canonical] = {
-      category: categoryOf?.get(canonical) || existing?.category || 'general',
-      usageCount: uses,
-      firstUsed: existing?.firstUsed || now,
-      variants: [...new Set([...(existing?.variants || []), ...variants])],
-    };
-
-    for (const v of variants) {
-      registry.aliases[v] = canonical;
-      // A tag that has been merged away is no longer canonical. Leaving it in
-      // both places is what produced the film→movies / startup→venture-funding
-      // contradictions in the committed registry.
-      delete registry.tags[v];
-    }
-  }
-
-  // An alias must never also be a canonical tag.
-  for (const alias of Object.keys(registry.aliases)) {
-    if (registry.tags[alias]) delete registry.tags[alias];
-  }
-
-  registry.lastUpdated = now;
-  return registry;
 }
 
 // ---------------------------------------------------------------------------
@@ -286,8 +219,16 @@ async function main() {
   const claimed = new Set(lexical.flatMap(g => g.variants));
   const remaining = [...counts.keys()].filter(t => !claimed.has(t));
   console.log(`🤖 Analysing ${remaining.length} remaining tags for synonyms…`);
-  const semantic = sanitiseGroups(await semanticGroups(remaining, counts), counts);
+  const { clean: semantic, rejected } = sanitiseGroups(await semanticGroups(remaining, counts), counts);
   console.log(`   ${semantic.length} semantic groups (${semantic.reduce((s, g) => s + g.variants.length, 0)} tags absorbed)`);
+
+  if (rejected.length) {
+    console.log(`\n🚫 Rejected ${rejected.length} proposed merges:`);
+    for (const r of rejected) {
+      console.log(`   ${r.canonical} ← ${(r.variants || []).join(', ')}`);
+      console.log(`     ${r.why}`);
+    }
+  }
 
   // Lexical wins any conflict: it is provable, the model's answer is not.
   const lexicalClaimed = new Set(lexical.flatMap(g => [g.canonical, ...g.variants]));

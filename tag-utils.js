@@ -209,3 +209,135 @@ export function revertTags(currentTags, { remove, restore }) {
   const kept = currentTags.filter(t => !remove.includes(t));
   return [...new Set([...kept, ...restore])];
 }
+
+// Words that give away a merge the model itself does not believe is an
+// equivalence. In the first live dry run three of five proposed merges carried
+// reasons like "related medium" and "related concept" -- the model was telling
+// us the merge was invalid while we applied it anyway.
+const NON_EQUIVALENCE = /\b(related|broader|narrower|subtopic|sub-topic|parent|child|category|categor\w+|medium|type of|kind of|form of|part of|associated|adjacent|similar theme|umbrella)\b/i;
+
+/**
+ * Decide which proposed merges are safe to apply. The model is advisory; this
+ * function is what actually decides, and it fails closed.
+ *
+ * Guards, each earned from a real bad proposal:
+ *   - relation must be an explicit "synonym"       (video ← video-games)
+ *   - the reason must not describe a relationship  (security ← risk-management)
+ *   - the canonical must already exist             (no merging into an invention)
+ *   - the canonical must be at least as used as
+ *     every variant it absorbs                     (art ← artificial-intelligence)
+ *
+ * That last one matters most: merging a heavily-used tag into a rarely-used one
+ * is never a consolidation, it is a rename that loses the better name.
+ */
+export function sanitiseGroups(groups, counts) {
+  const known = new Set(counts.keys());
+  const claimed = new Set();
+  const clean = [];
+  const rejected = [];
+
+  const reject = (group, why) =>
+    rejected.push({ canonical: group.canonical, variants: group.variants, why });
+
+  for (const group of groups) {
+    const canonical = normalizeTag(group.canonical);
+    if (!canonical) {
+      reject(group, 'canonical is empty after normalization');
+      continue;
+    }
+
+    if (group.relation !== 'synonym') {
+      reject(group, `relation is ${JSON.stringify(group.relation ?? null)}, not "synonym"`);
+      continue;
+    }
+
+    if (group.reason && NON_EQUIVALENCE.test(group.reason)) {
+      reject(group, `reason describes a relationship, not an equivalence: "${group.reason}"`);
+      continue;
+    }
+
+    // A semantic merge must target a tag that is really in use. Inventing a
+    // canonical is a job for the lexical pass, which can prove its answer.
+    if (!known.has(canonical)) {
+      reject(group, `canonical "${canonical}" is not an existing tag`);
+      continue;
+    }
+
+    if (claimed.has(canonical)) {
+      reject(group, `canonical "${canonical}" was already merged away`);
+      continue;
+    }
+
+    const canonicalUses = counts.get(canonical) || 0;
+
+    const variants = [];
+    for (const raw of new Set(group.variants.map(String))) {
+      if (!known.has(raw)) {
+        reject(group, `variant "${raw}" is not an existing tag`);
+        continue;
+      }
+      if (raw === canonical) continue;          // no self-merge
+      if (claimed.has(raw)) continue;           // first group to claim a tag wins
+
+      const variantUses = counts.get(raw) || 0;
+      if (variantUses > canonicalUses) {
+        reject(group, `"${raw}" (${variantUses}×) is used more than "${canonical}" (${canonicalUses}×) — would lose the better name`);
+        continue;
+      }
+      variants.push(raw);
+    }
+
+    if (!variants.length) continue;
+
+    for (const v of variants) claimed.add(v);
+    clean.push({
+      canonical,
+      variants,
+      totalUses: variants.reduce((s, v) => s + (counts.get(v) || 0), 0) + canonicalUses,
+      reason: group.reason || 'synonym',
+    });
+  }
+
+  return { clean, rejected };
+}
+
+/**
+ * Fold this run into the existing registry instead of rebuilding it. The old
+ * implementation wrote a fresh object every time, so usageCount and firstUsed
+ * were reset on every run and nothing ever accumulated.
+ */
+export function updateRegistry(registry, groups, counts, categoryOf) {
+  const now = new Date().toISOString();
+  registry.tags ||= {};
+  registry.aliases ||= {};
+
+  for (const { canonical, variants } of groups) {
+    const existing = registry.tags[canonical];
+    const uses = (counts.get(canonical) || 0) +
+      variants.reduce((s, v) => s + (counts.get(v) || 0), 0);
+
+    registry.tags[canonical] = {
+      category: categoryOf?.get(canonical) || existing?.category || 'general',
+      usageCount: uses,
+      firstUsed: existing?.firstUsed || now,
+      variants: [...new Set([...(existing?.variants || []), ...variants])],
+    };
+
+    for (const v of variants) {
+      registry.aliases[v] = canonical;
+      // A tag that has been merged away is no longer canonical. Leaving it in
+      // both places is what produced the film→movies / startup→venture-funding
+      // contradictions in the committed registry.
+      delete registry.tags[v];
+    }
+  }
+
+  // An alias must never also be a canonical tag.
+  for (const alias of Object.keys(registry.aliases)) {
+    if (registry.tags[alias]) delete registry.tags[alias];
+  }
+
+  registry.lastUpdated = now;
+  return registry;
+}
+

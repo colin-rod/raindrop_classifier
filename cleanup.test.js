@@ -3,63 +3,111 @@
 //   node --test cleanup.test.js
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
-
-// The engine imports OpenAI at module load, so exercise the two pure functions
-// by evaluating them out of the source rather than importing the whole module.
-const src = readFileSync(new URL('./cleanup-existing-tags.js', import.meta.url), 'utf8');
-const extract = name => {
-  const start = src.indexOf(`function ${name}(`);
-  const from = src.indexOf('{', start);
-  let depth = 0;
-  for (let i = from; i < src.length; i++) {
-    if (src[i] === '{') depth++;
-    if (src[i] === '}' && --depth === 0) return src.slice(start, i + 1);
-  }
-};
-
-const { normalizeTag } = await import('./tag-utils.js');
-const sanitiseGroups = eval(`(${extract('sanitiseGroups')})`);
-const updateRegistry = eval(`(${extract('updateRegistry')})`);
+import { sanitiseGroups, updateRegistry } from './tag-utils.js';
 
 const counts = new Map(Object.entries({
   crypto: 5, cryptocurrency: 5, 'crypto-industry': 2,
   movies: 8, marvel: 7, ai: 40,
+  art: 3, 'artificial-intelligence': 61,
+  video: 12, 'video-games': 30,
+  security: 9, 'risk-management': 4,
+  'software-development': 15, software: 22,
+  'data-analytics': 18, 'data-analysis': 6,
 }));
 
+const syn = (canonical, variants, reason = 'same concept') =>
+  ({ canonical, variants, relation: 'synonym', reason });
+
 test('sanitise drops variants the model invented', () => {
-  const out = sanitiseGroups(
-    [{ canonical: 'crypto', variants: ['cryptocurrency', 'dogecoin-hype'] }],
-    counts
-  );
-  assert.equal(out.length, 1);
-  assert.deepEqual(out[0].variants, ['cryptocurrency'], 'dogecoin-hype is not a real tag');
+  const { clean } = sanitiseGroups([syn('crypto', ['cryptocurrency', 'dogecoin-hype'])], counts);
+  assert.equal(clean.length, 1);
+  assert.deepEqual(clean[0].variants, ['cryptocurrency'], 'dogecoin-hype is not a real tag');
 });
 
 test('sanitise rejects self-merges', () => {
-  assert.deepEqual(sanitiseGroups([{ canonical: 'crypto', variants: ['crypto'] }], counts), []);
+  assert.deepEqual(sanitiseGroups([syn('crypto', ['crypto'])], counts).clean, []);
+});
+
+test('sanitise requires an explicit synonym relation', () => {
+  // The model labelled this one "related medium" and we applied it anyway.
+  const { clean, rejected } = sanitiseGroups(
+    [{ canonical: 'video', variants: ['video-games'], relation: 'related', reason: 'related medium' }],
+    counts
+  );
+  assert.deepEqual(clean, []);
+  assert.match(rejected[0].why, /not "synonym"/);
+});
+
+test('sanitise rejects a reason that describes a relationship', () => {
+  const { clean, rejected } = sanitiseGroups(
+    [syn('security', ['risk-management'], 'related concept')],
+    counts
+  );
+  assert.deepEqual(clean, [], 'a "related concept" is not an equivalence');
+  assert.match(rejected[0].why, /relationship, not an equivalence/);
+});
+
+test('sanitise refuses to merge a more-used tag into a less-used one', () => {
+  // art(3) <- artificial-intelligence(61): a prefix match, and it would have
+  // retagged every AI bookmark as "art".
+  const { clean, rejected } = sanitiseGroups(
+    [syn('art', ['artificial-intelligence'])],
+    counts
+  );
+  assert.deepEqual(clean, []);
+  assert.match(rejected[0].why, /used more than/);
+});
+
+test('sanitise rejects a canonical that is not a real tag', () => {
+  const { clean, rejected } = sanitiseGroups([syn('ai-and-ml', ['ai'])], counts);
+  assert.deepEqual(clean, []);
+  assert.match(rejected[0].why, /not an existing tag/);
+});
+
+test('sanitise still allows a genuine synonym in the safe direction', () => {
+  // data-analytics(18) <- data-analysis(6) was the one good merge proposed.
+  const { clean } = sanitiseGroups([syn('data-analytics', ['data-analysis'])], counts);
+  assert.equal(clean.length, 1);
+  assert.deepEqual(clean[0].variants, ['data-analysis']);
+});
+
+test('every merge from the first live dry run is now judged correctly', () => {
+  const proposed = [
+    { canonical: 'art', variants: ['artificial-intelligence'], relation: 'synonym', reason: 'same concept' },
+    { canonical: 'data-analytics', variants: ['data-analysis'], relation: 'synonym', reason: 'same concept' },
+    { canonical: 'video', variants: ['video-games'], relation: 'synonym', reason: 'related medium' },
+    { canonical: 'security', variants: ['risk-management'], relation: 'synonym', reason: 'related concept' },
+    { canonical: 'software-development', variants: ['software'], relation: 'synonym', reason: 'related concept' },
+  ];
+  const { clean } = sanitiseGroups(proposed, counts);
+  assert.deepEqual(
+    clean.map(g => `${g.canonical}<-${g.variants.join(',')}`),
+    ['data-analytics<-data-analysis'],
+    'only the one true synonym survives'
+  );
 });
 
 test('sanitise normalizes the canonical name', () => {
-  const out = sanitiseGroups([{ canonical: 'Crypto Currency', variants: ['cryptocurrency'] }], counts);
-  assert.equal(out[0].canonical, 'crypto-currency');
+  const withUpper = new Map([...counts, ['Crypto Currency', 4]]);
+  const { clean } = sanitiseGroups([syn('crypto', ['Crypto Currency'])], withUpper);
+  assert.equal(clean[0].canonical, 'crypto');
 });
 
 test('a tag can only be claimed by one group', () => {
-  const out = sanitiseGroups([
-    { canonical: 'crypto', variants: ['cryptocurrency'] },
-    { canonical: 'movies', variants: ['cryptocurrency'] },
+  const { clean } = sanitiseGroups([
+    syn('crypto', ['cryptocurrency']),
+    syn('movies', ['cryptocurrency']),
   ], counts);
-  assert.equal(out.length, 1);
-  assert.equal(out[0].canonical, 'crypto');
+  assert.equal(clean.length, 1);
+  assert.equal(clean[0].canonical, 'crypto');
 });
 
 test('a canonical already merged away cannot host a new group', () => {
-  const out = sanitiseGroups([
-    { canonical: 'crypto', variants: ['cryptocurrency'] },
-    { canonical: 'cryptocurrency', variants: ['crypto-industry'] },
+  const { clean } = sanitiseGroups([
+    syn('crypto', ['cryptocurrency']),
+    syn('cryptocurrency', ['crypto-industry']),
   ], counts);
-  assert.equal(out.length, 1, 'second group would resurrect a merged tag');
+  assert.equal(clean.length, 1, 'second group would resurrect a merged tag');
 });
 
 test('registry accumulates instead of resetting', () => {
