@@ -1,14 +1,33 @@
 import 'dotenv/config';
-import fetch from "node-fetch";
 import OpenAI from "openai";
 import fs from 'fs/promises';
+import { RaindropClient, sleep } from './raindrop-api.js';
+import {
+  normalizeTag, lexicalGroups, circuitBreaker,
+  plannedReverts, revertTags,
+} from './tag-utils.js';
 
-const RAINDROP_TOKEN = process.env.RAINDROP_TOKEN;
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+// Weekly tag consolidation across the whole account.
+//
+//   node cleanup-existing-tags.js              apply
+//   node cleanup-existing-tags.js --dry-run    print the plan, write nothing
+//   node cleanup-existing-tags.js --revert <runId>
+//
+// Merges are applied with PUT /tags/0, which rewrites a tag across every
+// bookmark server-side. That replaces the old fetch-every-bookmark, recompute
+// the tags array, PUT each one loop: it is one call per merge group instead of
+// one per bookmark, and it cannot clobber tags outside the merge.
 
-const client = new OpenAI({ apiKey: OPENAI_API_KEY });
+const DRY_RUN = process.argv.includes('--dry-run');
+const REVERT_ID = process.argv[process.argv.indexOf('--revert') + 1];
+const IS_REVERT = process.argv.includes('--revert');
 
-// Your existing collection mappings
+const MERGE_LOG = 'tag-merge-log.json';
+const REGISTRY = 'tag-registry.json';
+const METRICS = 'tag-metrics.json';
+
+const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+
 const COLLECTIONS = {
   "AI & Technology": 59437707,
   "Entertainment & Media": 59437708,
@@ -20,202 +39,79 @@ const COLLECTIONS = {
   "Global & Cultural": 59437715,
   "Others": 59437777
 };
+const COLLECTION_NAMES = Object.fromEntries(
+  Object.entries(COLLECTIONS).map(([name, id]) => [id, name])
+);
 
-// Fetch all bookmarks with tags from all collections
-async function fetchAllBookmarksWithTags() {
-  const allBookmarks = [];
-  
-  // Fetch from each collection
-  for (const [categoryName, collectionId] of Object.entries(COLLECTIONS)) {
-    console.log(`📂 Fetching bookmarks from ${categoryName}...`);
-    
-    let page = 0;
-    const perpage = 50;
-    
-    while (true) {
-      const resp = await fetch(`https://api.raindrop.io/rest/v1/raindrops/${collectionId}?perpage=${perpage}&page=${page}`, {
-        headers: { Authorization: `Bearer ${RAINDROP_TOKEN}` },
-      });
-
-      if (!resp.ok) throw new Error(`Failed to fetch from collection ${collectionId}`);
-      const data = await resp.json();
-
-      if (data.items.length === 0) break;
-      
-      // Add category info to each bookmark
-      const bookmarksWithCategory = data.items.map(bookmark => ({
-        ...bookmark,
-        currentCategory: categoryName
-      }));
-      
-      allBookmarks.push(...bookmarksWithCategory);
-      page++;
-    }
-  }
-
-  return allBookmarks;
-}
-
-// Extract all unique tags from bookmarks
-function extractAllTags(bookmarks) {
-  const tagSet = new Set();
-  const tagUsage = new Map();
-
-  bookmarks.forEach(bookmark => {
-    if (bookmark.tags && bookmark.tags.length > 0) {
-      bookmark.tags.forEach(tag => {
-        tagSet.add(tag);
-        tagUsage.set(tag, (tagUsage.get(tag) || 0) + 1);
-      });
-    }
-  });
-
-  return { uniqueTags: Array.from(tagSet), tagUsage };
-}
-
-const METRIC_THRESHOLDS = {
-  growthRate: 0.1,
-  newTagRatio: 0.15,
-  singleUseRatio: 0.3,
-  entropy: 3.0,
-};
-
-async function shouldRunCleanup(currentUniqueTags, currentTagUsage) {
-  const uniqueCount = currentUniqueTags.length;
-  const totalUsage = Array.from(currentTagUsage.values()).reduce((sum, count) => sum + count, 0);
-
-  let registry;
-  let registryMissing = false;
-
+async function readJson(path, fallback) {
   try {
-    const registryRaw = await fs.readFile('tag-registry.json', 'utf8');
-    registry = JSON.parse(registryRaw);
+    return JSON.parse(await fs.readFile(path, 'utf8'));
   } catch (error) {
-    if (error.code === 'ENOENT') {
-      console.log('📁 No existing tag registry found. Defaulting to cleanup.');
-      registryMissing = true;
-      registry = { tags: {}, aliases: {} };
-    } else {
-      throw error;
-    }
+    if (error.code === 'ENOENT') return fallback;
+    throw error;
   }
-
-  const existingTags = registry?.tags && typeof registry.tags === 'object' ? registry.tags : {};
-  const existingAliases = registry?.aliases && typeof registry.aliases === 'object' ? registry.aliases : {};
-
-  const previousUniqueCount = Object.keys(existingTags).length;
-  const knownTags = new Set([
-    ...Object.keys(existingTags),
-    ...Object.keys(existingAliases),
-  ]);
-
-  const newTagCount = currentUniqueTags.filter(tag => !knownTags.has(tag)).length;
-  const growthRate = previousUniqueCount > 0
-    ? (uniqueCount - previousUniqueCount) / previousUniqueCount
-    : uniqueCount > 0 ? 1 : 0;
-  const newTagRatio = uniqueCount > 0 ? newTagCount / uniqueCount : 0;
-  const singleUseCount = Array.from(currentTagUsage.values()).filter(count => count === 1).length;
-  const singleUseRatio = uniqueCount > 0 ? singleUseCount / uniqueCount : 0;
-  const entropy = totalUsage > 0
-    ? -Array.from(currentTagUsage.values()).reduce((sum, count) => {
-        const p = count / totalUsage;
-        return p > 0 ? sum + p * Math.log2(p) : sum;
-      }, 0)
-    : 0;
-
-  console.log('🧮 Tag health metrics:');
-  console.log(`   Previous unique tags: ${previousUniqueCount}`);
-  console.log(`   Current unique tags: ${uniqueCount}`);
-  console.log(`   Total tag usage: ${totalUsage}`);
-  console.log(`   Growth rate: ${(growthRate * 100).toFixed(2)}% (threshold ${(METRIC_THRESHOLDS.growthRate * 100).toFixed(0)}%)`);
-  console.log(`   New-tag ratio: ${(newTagRatio * 100).toFixed(2)}% (threshold ${(METRIC_THRESHOLDS.newTagRatio * 100).toFixed(0)}%)`);
-  console.log(`   Single-use ratio: ${(singleUseRatio * 100).toFixed(2)}% (threshold ${(METRIC_THRESHOLDS.singleUseRatio * 100).toFixed(0)}%)`);
-  console.log(`   Entropy: ${entropy.toFixed(2)} (threshold ${METRIC_THRESHOLDS.entropy.toFixed(2)})`);
-
-  const metricsEntry = {
-    timestamp: new Date().toISOString(),
-    previousUniqueTagCount: previousUniqueCount,
-    uniqueTagCount: uniqueCount,
-    totalTagUsage: totalUsage,
-    newTagCount,
-    growthRate,
-    newTagRatio,
-    singleUseRatio,
-    entropy,
-  };
-
-  try {
-    let history = [];
-    try {
-      const historyRaw = await fs.readFile('tag-metrics.json', 'utf8');
-      history = JSON.parse(historyRaw);
-      if (!Array.isArray(history)) {
-        history = [];
-      }
-    } catch (historyError) {
-      if (historyError.code !== 'ENOENT') {
-        throw historyError;
-      }
-    }
-
-    history.push(metricsEntry);
-    await fs.writeFile('tag-metrics.json', JSON.stringify(history, null, 2));
-  } catch (writeError) {
-    console.error('⚠️  Failed to persist tag metrics:', writeError);
-  }
-
-  if (registryMissing) {
-    return true;
-  }
-
-  const shouldRun = (
-    growthRate >= METRIC_THRESHOLDS.growthRate ||
-    newTagRatio >= METRIC_THRESHOLDS.newTagRatio ||
-    singleUseRatio >= METRIC_THRESHOLDS.singleUseRatio ||
-    entropy <= METRIC_THRESHOLDS.entropy
-  );
-
-  console.log(shouldRun
-    ? '✅ Cleanup criteria met — proceeding with AI cleanup.'
-    : 'ℹ️ Cleanup thresholds not met — skipping AI cleanup.');
-
-  return shouldRun;
 }
 
-// Use AI to group similar tags and suggest consolidation
-async function analyzeTagGroups(tags, batchSize = 20) {
-  console.log(`🤖 Analyzing ${tags.length} tags for consolidation...`);
-  
-  const consolidationGroups = [];
-  
-  // Process tags in batches to avoid overwhelming the AI
-  for (let i = 0; i < tags.length; i += batchSize) {
-    const batch = tags.slice(i, i + batchSize);
-    
-    const prompt = `Analyze these tags and group similar ones together:
+// ---------------------------------------------------------------------------
+// Semantic pass
+// ---------------------------------------------------------------------------
 
-Tags: ${batch.join(", ")}
+/**
+ * Ask the model to merge true synonyms.
+ *
+ * The old implementation sliced the vocabulary into windows of 20 and grouped
+ * within each window, so two duplicates in different windows were never
+ * compared -- at 600 tags any given pair had roughly a 3% chance of being seen
+ * together. Here every prompt carries the FULL vocabulary as context and the
+ * batch only decides which of its own tags fold into it, so a merge target can
+ * live anywhere in the list.
+ */
+async function semanticGroups(tags, counts, batchSize = 120) {
+  if (!tags.length) return [];
 
-Find groups of tags that mean the same thing or are very similar. For each group, suggest the best canonical name.
+  const vocabulary = tags
+    .map(t => `${t} (${counts.get(t) || 0})`)
+    .join(', ');
 
-Examples:
-- ["js", "javascript", "javascript-lang"] → canonical: "javascript"
-- ["ml", "machine-learning", "machine learning"] → canonical: "machine-learning"
-- ["react", "reactjs", "react-js"] → canonical: "react"
+  // Sorting puts lexically adjacent tags in the same batch, which keeps related
+  // concepts together and makes each batch cheaper to reason about.
+  const sorted = [...tags].sort();
+  const groups = [];
 
-Return JSON:
-{
-  "groups": [
-    {
-      "canonical": "javascript",
-      "variants": ["js", "javascript", "javascript-lang"],
-      "reason": "All refer to the JavaScript programming language"
-    }
-  ],
-  "standalone": ["unique-tag1", "unique-tag2"]
-}
+  for (let i = 0; i < sorted.length; i += batchSize) {
+    const batch = sorted.slice(i, i + batchSize);
 
-Include standalone tags that don't have similar variants.`;
+    const prompt = `You are consolidating a bookmark tag vocabulary.
+
+FULL VOCABULARY (tag followed by its usage count):
+${vocabulary}
+
+TAGS TO DECIDE ON THIS PASS:
+${batch.join(', ')}
+
+For each tag in "TAGS TO DECIDE ON", decide whether it is a true synonym of
+another tag. The canonical you choose may be ANY tag from the full vocabulary,
+not just from this batch.
+
+Merge ONLY true synonyms — different names for the same concept:
+  ✅ "crypto" + "cryptocurrency" + "crypto-industry" → "crypto"
+  ✅ "job-market" + "jobs" + "employment" → "jobs"
+  ✅ "tv-show" + "tv-shows" → "tv-shows"
+
+Do NOT merge related-but-distinct concepts, or a specific thing into its
+general category:
+  ❌ "marvel" + "movies"        (a franchise is not the medium)
+  ❌ "ai-coding" + "ai"         (a subtopic is not its parent)
+  ❌ "london" + "geopolitics"   (merely related)
+  ❌ "privacy" + "surveillance" (adjacent, not the same)
+
+Keep named entities (people, companies, franchises) separate unless they are
+genuinely the same entity spelled differently.
+Prefer the higher-usage tag as canonical. Use lowercase-with-hyphens.
+A tag with no true synonym should simply be omitted from your answer.
+
+Return JSON only:
+{"groups": [{"canonical": "crypto", "variants": ["cryptocurrency"], "reason": "same concept"}]}`;
 
     const resp = await client.chat.completions.create({
       model: "gpt-4o-mini",
@@ -223,157 +119,271 @@ Include standalone tags that don't have similar variants.`;
       response_format: { type: "json_object" },
     });
 
-    const result = JSON.parse(resp.choices[0].message.content);
-    consolidationGroups.push(...result.groups);
-    
-    console.log(`📊 Processed batch ${Math.floor(i/batchSize) + 1}/${Math.ceil(tags.length/batchSize)}`);
-    
-    // Rate limiting
-    await new Promise(r => setTimeout(r, 1000));
+    const parsed = JSON.parse(resp.choices[0].message.content);
+    for (const g of parsed.groups || []) {
+      if (!g?.canonical || !Array.isArray(g.variants)) continue;
+      groups.push(g);
+    }
+
+    console.log(`   batch ${Math.floor(i / batchSize) + 1}/${Math.ceil(sorted.length / batchSize)}`);
+    await sleep(1000);
   }
-  
-  return consolidationGroups;
+
+  return groups;
 }
 
-// Create tag mapping (old tag → new canonical tag)
-function createTagMapping(consolidationGroups) {
-  const mapping = new Map();
-  
-  consolidationGroups.forEach(group => {
-    group.variants.forEach(variant => {
-      if (variant !== group.canonical) {
-        mapping.set(variant, group.canonical);
-      }
+/**
+ * Drop anything the model proposed that we cannot justify: self-merges,
+ * variants it invented, and merges that would contradict an earlier group.
+ * The model is advisory here; this function is what actually decides.
+ */
+function sanitiseGroups(groups, counts) {
+  const known = new Set(counts.keys());
+  const claimed = new Set();
+  const clean = [];
+
+  for (const group of groups) {
+    const canonical = normalizeTag(group.canonical);
+    if (!canonical) continue;
+
+    const variants = [...new Set(group.variants.map(String))]
+      .filter(v => known.has(v))            // must be a tag that really exists
+      .filter(v => v !== canonical)          // no self-merge
+      .filter(v => !claimed.has(v));         // first group to claim a tag wins
+
+    if (!variants.length) continue;
+    if (claimed.has(canonical)) continue;    // canonical already merged away
+
+    for (const v of variants) claimed.add(v);
+    clean.push({
+      canonical,
+      variants,
+      totalUses: variants.reduce((s, v) => s + (counts.get(v) || 0), 0) + (counts.get(canonical) || 0),
+      reason: group.reason || 'synonym',
     });
-  });
-  
-  return mapping;
+  }
+
+  return clean;
 }
 
-// Update bookmarks with consolidated tags
-async function updateBookmarksWithCleanTags(bookmarks, tagMapping) {
-  console.log(`🔄 Updating ${bookmarks.length} bookmarks with cleaned tags...`);
-  
-  let updatedCount = 0;
-  
-  for (const bookmark of bookmarks) {
-    if (!bookmark.tags || bookmark.tags.length === 0) continue;
-    
-    // Map old tags to new canonical tags
-    const newTags = bookmark.tags
-      .map(tag => tagMapping.get(tag) || tag)
-      .filter((tag, index, array) => array.indexOf(tag) === index); // Remove duplicates
-    
-    // Only update if tags changed
-    if (JSON.stringify(bookmark.tags.sort()) !== JSON.stringify(newTags.sort())) {
-      const resp = await fetch(`https://api.raindrop.io/rest/v1/raindrop/${bookmark._id}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${RAINDROP_TOKEN}`,
-        },
-        body: JSON.stringify({
-          tags: newTags,
-        }),
-      });
+// ---------------------------------------------------------------------------
+// Registry
+// ---------------------------------------------------------------------------
 
-      if (resp.ok) {
-        console.log(`✅ Updated "${bookmark.title}"`);
-        console.log(`   Old tags: [${bookmark.tags.join(", ")}]`);
-        console.log(`   New tags: [${newTags.join(", ")}]\n`);
-        updatedCount++;
-      } else {
-        console.error(`❌ Failed to update "${bookmark.title}"`);
-      }
-      
-      // Rate limiting
-      await new Promise(r => setTimeout(r, 1000));
+/**
+ * Fold this run into the existing registry instead of rebuilding it. The old
+ * implementation wrote a fresh object every time, so usageCount and firstUsed
+ * were reset on every run and nothing ever accumulated.
+ */
+function updateRegistry(registry, groups, counts, categoryOf) {
+  const now = new Date().toISOString();
+  registry.tags ||= {};
+  registry.aliases ||= {};
+
+  for (const { canonical, variants } of groups) {
+    const existing = registry.tags[canonical];
+    const uses = (counts.get(canonical) || 0) +
+      variants.reduce((s, v) => s + (counts.get(v) || 0), 0);
+
+    registry.tags[canonical] = {
+      category: categoryOf?.get(canonical) || existing?.category || 'general',
+      usageCount: uses,
+      firstUsed: existing?.firstUsed || now,
+      variants: [...new Set([...(existing?.variants || []), ...variants])],
+    };
+
+    for (const v of variants) {
+      registry.aliases[v] = canonical;
+      // A tag that has been merged away is no longer canonical. Leaving it in
+      // both places is what produced the film→movies / startup→venture-funding
+      // contradictions in the committed registry.
+      delete registry.tags[v];
     }
   }
-  
-  return updatedCount;
+
+  // An alias must never also be a canonical tag.
+  for (const alias of Object.keys(registry.aliases)) {
+    if (registry.tags[alias]) delete registry.tags[alias];
+  }
+
+  registry.lastUpdated = now;
+  return registry;
 }
 
-// Save the tag registry for future use
-async function saveTagRegistry(consolidationGroups, tagUsage) {
-  const registry = {
-    tags: {},
-    aliases: {},
-    lastUpdated: new Date().toISOString()
-  };
-  
-  // Add canonical tags
-  consolidationGroups.forEach(group => {
-    registry.tags[group.canonical] = {
-      category: 'general', // You can enhance this later
-      usageCount: group.variants.reduce((sum, variant) => sum + (tagUsage.get(variant) || 0), 0),
-      firstUsed: new Date().toISOString(),
-      variants: group.variants
-    };
-    
-    // Add aliases
-    group.variants.forEach(variant => {
-      if (variant !== group.canonical) {
-        registry.aliases[variant] = group.canonical;
-      }
-    });
-  });
-  
-  await fs.writeFile('tag-registry.json', JSON.stringify(registry, null, 2));
-  console.log('💾 Saved tag registry to tag-registry.json');
+// ---------------------------------------------------------------------------
+// Metrics (consumed by the randomizer's Classifier panel)
+// ---------------------------------------------------------------------------
+
+async function writeMetrics(entry) {
+  const history = await readJson(METRICS, []);
+  const list = Array.isArray(history) ? history : [];
+  list.push(entry);
+  await fs.writeFile(METRICS, JSON.stringify(list, null, 2));
 }
+
+// ---------------------------------------------------------------------------
+// Revert
+// ---------------------------------------------------------------------------
+
+async function revert(raindrop, runId) {
+  const log = await readJson(MERGE_LOG, { runs: [] });
+  const run = log.runs.find(r => r.runId === runId) || (runId ? null : log.runs.at(-1));
+
+  if (!run) {
+    console.error(`❌ No run "${runId}" in ${MERGE_LOG}.`);
+    console.error(`   Available: ${log.runs.map(r => r.runId).join(', ') || '(none)'}`);
+    process.exit(1);
+  }
+
+  const plan = plannedReverts(run);
+  console.log(`↩️  Reverting run ${run.runId} (${run.appliedAt})`);
+  console.log(`   ${run.merges.length} merges across ${plan.length} bookmarks\n`);
+
+  // Undoing a merge needs per-bookmark writes: at the vocabulary level the
+  // merged populations are indistinguishable, so only recorded provenance can
+  // separate them.
+  const bookmarks = await raindrop.allBookmarks();
+  const byId = new Map(bookmarks.map(b => [String(b._id), b]));
+
+  let restored = 0;
+  for (const op of plan) {
+    const current = byId.get(op.id);
+    if (!current) continue;
+    const next = revertTags(current.tags || [], op);
+    await raindrop.setBookmarkTags(op.id, next);
+    restored++;
+    if (restored % 25 === 0) console.log(`   restored ${restored}/${plan.length}`);
+  }
+
+  console.log(`\n✅ Restored ${restored} bookmarks.`);
+  if (raindrop.dryRun) console.log('   (dry run — nothing was written)');
+}
+
+// ---------------------------------------------------------------------------
 
 async function main() {
-  console.log('🧹 Starting one-time tag cleanup...\n');
-  
-  // Step 1: Fetch all bookmarks
-  console.log('📥 Fetching all bookmarks with tags...');
-  const bookmarks = await fetchAllBookmarksWithTags();
-  console.log(`Found ${bookmarks.length} total bookmarks`);
-  
-  // Step 2: Extract and analyze tags
-  const { uniqueTags, tagUsage } = extractAllTags(bookmarks);
+  const raindrop = new RaindropClient(process.env.RAINDROP_TOKEN, { dryRun: DRY_RUN });
 
-  if (!await shouldRunCleanup(uniqueTags, tagUsage)) {
-    console.log('⏭️ Skipping AI cleanup this week.');
-    process.exit(0);
+  if (IS_REVERT) return revert(raindrop, REVERT_ID);
+
+  console.log('🧹 Tag consolidation\n');
+  if (DRY_RUN) console.log('   DRY RUN — no writes will be made\n');
+
+  // 1. The whole vocabulary, in one call, across every collection.
+  const counts = await raindrop.getTags(0);
+  console.log(`📊 ${counts.size} unique tags, ${[...counts.values()].reduce((a, b) => a + b, 0)} applications`);
+
+  const before = {
+    unique: counts.size,
+    singleUse: [...counts.values()].filter(c => c === 1).length,
+  };
+
+  // 2. Deterministic merges — case, punctuation, genuine plurals.
+  const lexical = lexicalGroups(counts);
+  console.log(`🔤 ${lexical.length} lexical groups (${lexical.reduce((s, g) => s + g.variants.length, 0)} tags absorbed)`);
+
+  // 3. Semantic merges over everything the lexical pass did not claim.
+  const claimed = new Set(lexical.flatMap(g => g.variants));
+  const remaining = [...counts.keys()].filter(t => !claimed.has(t));
+  console.log(`🤖 Analysing ${remaining.length} remaining tags for synonyms…`);
+  const semantic = sanitiseGroups(await semanticGroups(remaining, counts), counts);
+  console.log(`   ${semantic.length} semantic groups (${semantic.reduce((s, g) => s + g.variants.length, 0)} tags absorbed)`);
+
+  // Lexical wins any conflict: it is provable, the model's answer is not.
+  const lexicalClaimed = new Set(lexical.flatMap(g => [g.canonical, ...g.variants]));
+  const groups = [
+    ...lexical,
+    ...semantic.filter(g => !g.variants.some(v => lexicalClaimed.has(v))),
+  ];
+
+  // 4. Refuse a run that would flatten the vocabulary. Not a review gate — it
+  //    aborts and the next scheduled run tries again.
+  const breaker = circuitBreaker(counts.size, groups);
+  if (breaker.tripped) {
+    console.error(`\n🛑 Circuit breaker: ${breaker.reason}`);
+    console.error('   Nothing was applied. Inspect with --dry-run.');
+    process.exit(1);
   }
 
-  console.log(`Found ${uniqueTags.length} unique tags`);
-  console.log(`Top 10 most used tags: ${Array.from(tagUsage.entries())
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 10)
-    .map(([tag, count]) => `${tag}(${count})`)
-    .join(', ')}\n`);
-  
-  // Step 3: AI analysis for consolidation
-  const consolidationGroups = await analyzeTagGroups(uniqueTags);
-  
-  // Step 4: Show consolidation plan
-  console.log('\n📋 Consolidation Plan:');
-  consolidationGroups.forEach(group => {
-    if (group.variants.length > 1) {
-      console.log(`🔗 "${group.canonical}" ← [${group.variants.filter(v => v !== group.canonical).join(', ')}]`);
-      console.log(`   Reason: ${group.reason}\n`);
+  console.log('\n📋 Merge plan');
+  for (const g of groups) {
+    console.log(`   ${g.canonical}  ←  ${g.variants.join(', ')}`);
+    if (g.reason) console.log(`     ${g.reason}`);
+  }
+  if (!groups.length) console.log('   (nothing to merge)');
+
+  // 5. Record provenance BEFORE merging, so the run stays reversible.
+  const runId = new Date().toISOString().replace(/[:.]/g, '-');
+  let provenance = {};
+  let categoryOf = new Map();
+  if (groups.length) {
+    console.log('\n📸 Recording provenance for revert…');
+    const bookmarks = await raindrop.allBookmarks({
+      onProgress: n => process.stdout.write(`\r   scanned ${n}…`),
+    });
+    process.stdout.write('\r');
+    provenance = await raindrop.tagProvenance(groups.flatMap(g => g.variants), bookmarks);
+
+    // Categories come from where the bookmarks actually live. The old code
+    // hardcoded 'general', which made getPopularTagsByCategory() return []
+    // for eight of the nine collections.
+    for (const b of bookmarks) {
+      const name = COLLECTION_NAMES[b.collection?.$id];
+      if (!name) continue;
+      for (const tag of b.tags || []) {
+        if (!categoryOf.has(tag)) categoryOf.set(tag, name);
+      }
     }
-  });
-  
-  // Step 5: Confirm before proceeding
-  console.log(`\n⚠️  This will update ${bookmarks.filter(b => b.tags?.length > 0).length} bookmarks.`);
-  console.log('Press Ctrl+C to cancel, or wait 10 seconds to proceed...\n');
-  await new Promise(r => setTimeout(r, 10000));
-  
-  // Step 6: Create mapping and update bookmarks
-  const tagMapping = createTagMapping(consolidationGroups);
-  const updatedCount = await updateBookmarksWithCleanTags(bookmarks, tagMapping);
-  
-  // Step 7: Save registry for future use
-  await saveTagRegistry(consolidationGroups, tagUsage);
-  
-  console.log(`\n✨ Cleanup complete!`);
-  console.log(`📊 Updated ${updatedCount} bookmarks`);
-  console.log(`🏷️  Consolidated ${tagMapping.size} duplicate tags`);
-  console.log(`📁 Created tag registry with ${consolidationGroups.length} canonical tags`);
+  }
+
+  // 6. Apply, one call per group.
+  console.log('\n🔀 Applying merges…');
+  const applied = [];
+  for (const g of groups) {
+    await raindrop.mergeTags(g.canonical, g.variants);
+    applied.push({ replace: g.canonical, tags: g.variants, reason: g.reason });
+    console.log(`   ✅ ${g.canonical} ← ${g.variants.join(', ')}`);
+  }
+
+  // 7. Persist registry, undo log and metrics.
+  const registry = await readJson(REGISTRY, { tags: {}, aliases: {} });
+  updateRegistry(registry, groups, counts, categoryOf);
+
+  const after = await raindrop.getTags(0).catch(() => counts);
+  const metrics = {
+    timestamp: new Date().toISOString(),
+    runId,
+    previousUniqueTagCount: before.unique,
+    uniqueTagCount: DRY_RUN ? before.unique : after.size,
+    tagsMerged: applied.reduce((s, a) => s + a.tags.length, 0),
+    lexicalGroups: lexical.length,
+    semanticGroups: semantic.length,
+    singleUseBefore: before.singleUse,
+    singleUseAfter: DRY_RUN ? before.singleUse : [...after.values()].filter(c => c === 1).length,
+    dryRun: DRY_RUN,
+  };
+
+  if (DRY_RUN) {
+    console.log(`\n🔎 Dry run complete — ${raindrop.writes.length} writes withheld:`);
+    for (const w of raindrop.writes.slice(0, 20)) {
+      console.log(`   ${w.method} ${w.path}  ${JSON.stringify(w.body)}`);
+    }
+    if (raindrop.writes.length > 20) console.log(`   … and ${raindrop.writes.length - 20} more`);
+    return;
+  }
+
+  await fs.writeFile(REGISTRY, JSON.stringify(registry, null, 2));
+
+  const log = await readJson(MERGE_LOG, { runs: [] });
+  log.runs.push({ runId, appliedAt: new Date().toISOString(), merges: applied, provenance });
+  await fs.writeFile(MERGE_LOG, JSON.stringify(log, null, 2));
+
+  await writeMetrics(metrics);
+
+  console.log(`\n✨ Cleanup complete`);
+  console.log(`   Consolidated ${metrics.tagsMerged} duplicate tags`);
+  console.log(`   Current unique tags: ${metrics.uniqueTagCount} (was ${metrics.previousUniqueTagCount})`);
+  console.log(`   Revert this run with: node cleanup-existing-tags.js --revert ${runId}`);
 }
 
-main().catch(err => console.error("❌ Error:", err));
+main().catch(err => { console.error("❌", err.message); process.exit(1); });
