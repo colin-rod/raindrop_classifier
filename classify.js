@@ -2,6 +2,7 @@ import 'dotenv/config';
 import fetch from "node-fetch";
 import OpenAI from "openai";
 import fs from 'fs/promises';
+import { normalizeTag, similarity } from './tag-utils.js';
 
 const RAINDROP_TOKEN = process.env.RAINDROP_TOKEN;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
@@ -35,6 +36,7 @@ class TagManager {
     try {
       const data = await fs.readFile(this.tagRegistryPath, 'utf8');
       this.registry = JSON.parse(data);
+      this.buildAliasIndex();
     } catch (error) {
       if (error.code === 'ENOENT') {
         console.log('📝 Creating new tag registry...');
@@ -55,92 +57,95 @@ class TagManager {
   }
 
   normalizeTag(tag) {
-    return tag.toLowerCase()
-      .replace(/[^a-z0-9\s&-]/g, '')
-      .replace(/\s+/g, '-')
-      .replace(/^-+|-+$/g, '')
-      .substring(0, 50);
+    return normalizeTag(tag);
   }
 
-  levenshteinDistance(str1, str2) {
-    const matrix = Array(str2.length + 1).fill(null).map(() => Array(str1.length + 1).fill(null));
-    
-    for (let i = 0; i <= str1.length; i++) matrix[0][i] = i;
-    for (let j = 0; j <= str2.length; j++) matrix[j][0] = j;
-    
-    for (let j = 1; j <= str2.length; j++) {
-      for (let i = 1; i <= str1.length; i++) {
-        const cost = str1[i - 1] === str2[j - 1] ? 0 : 1;
-        matrix[j][i] = Math.min(
-          matrix[j][i - 1] + 1,
-          matrix[j - 1][i] + 1,
-          matrix[j - 1][i - 1] + cost
-        );
-      }
+  /**
+   * Build a lookup from any known spelling of a tag to its canonical form.
+   *
+   * registry.aliases is keyed by the raw variant ("Venture Capital"), but tags
+   * arriving from the model are normalized first, so a straight key lookup
+   * missed every alias -- which is why the 393-entry alias map was written each
+   * week and never actually used to resolve anything.
+   */
+  buildAliasIndex() {
+    this.aliasIndex = new Map();
+    for (const [variant, canonical] of Object.entries(this.registry.aliases || {})) {
+      this.aliasIndex.set(variant, canonical);
+      this.aliasIndex.set(normalizeTag(variant), canonical);
     }
-    
-    return matrix[str2.length][str1.length];
   }
 
+  /** Follow aliases to the canonical tag, tolerating a malformed alias cycle. */
+  resolve(tag) {
+    if (!this.aliasIndex) this.buildAliasIndex();
+
+    let current = tag;
+    const seen = new Set();
+    while (this.aliasIndex.has(current) && !seen.has(current)) {
+      seen.add(current);
+      current = this.aliasIndex.get(current);
+    }
+    return normalizeTag(current) || current;
+  }
+
+  /**
+   * Tags that look similar to this one. Used only to report near-misses -- it
+   * is NOT a merge decision. Edit distance measures string shape, not meaning:
+   * it would happily merge "space"/"spaces" while missing
+   * "crypto"/"cryptocurrency" entirely. Real merging is the cleanup script's
+   * job, where a model judges meaning and every merge is recorded and
+   * reversible.
+   */
   findSimilarTags(tag, threshold = 0.8) {
-    const normalizedTag = this.normalizeTag(tag);
-    const similarTags = [];
-    
-    for (const existingTag in this.registry.tags) {
-      const distance = this.levenshteinDistance(normalizedTag, existingTag);
-      const maxLen = Math.max(normalizedTag.length, existingTag.length);
-      const similarity = 1 - (distance / maxLen);
-      
-      if (similarity >= threshold && normalizedTag !== existingTag) {
-        similarTags.push({ tag: existingTag, similarity });
-      }
-    }
-    
-    return similarTags.sort((a, b) => b.similarity - a.similarity);
+    const normalized = normalizeTag(tag);
+    return Object.keys(this.registry.tags)
+      .filter(existing => existing !== normalized)
+      .map(existing => ({ tag: existing, similarity: similarity(normalized, existing) }))
+      .filter(({ similarity: s }) => s >= threshold)
+      .sort((a, b) => b.similarity - a.similarity);
   }
 
   addTag(tag, category) {
-    const normalizedTag = this.normalizeTag(tag);
-    if (!normalizedTag) return normalizedTag;
-    
-    if (this.registry.tags[normalizedTag]) {
-      this.registry.tags[normalizedTag].usageCount++;
+    const normalized = normalizeTag(tag);
+    if (!normalized) return normalized;
+
+    if (this.registry.tags[normalized]) {
+      this.registry.tags[normalized].usageCount++;
+      // Backfill the real collection name over the historical 'general'.
+      if (category && this.registry.tags[normalized].category === 'general') {
+        this.registry.tags[normalized].category = category;
+      }
     } else {
-      this.registry.tags[normalizedTag] = {
+      this.registry.tags[normalized] = {
         category,
         usageCount: 1,
-        firstUsed: new Date().toISOString()
+        firstUsed: new Date().toISOString(),
+        variants: [],
       };
     }
-    
-    return normalizedTag;
+
+    return normalized;
   }
 
   processAITags(aiTags, category) {
-    const processedTags = [];
-    
+    const processed = [];
+
     for (const tag of aiTags) {
-      const normalizedTag = this.normalizeTag(tag);
-      if (!normalizedTag) continue;
-      
-      // Check if tag already exists
-      if (this.registry.tags[normalizedTag]) {
-        processedTags.push(this.addTag(normalizedTag, category));
-        continue;
+      const normalized = normalizeTag(tag);
+      if (!normalized) continue;
+
+      // An alias is a decision the cleanup already made and applied to the
+      // library, so honour it before considering the tag new.
+      const canonical = this.resolve(normalized);
+      if (canonical !== normalized) {
+        console.log(`\u{1F500} Alias "${tag}" \u2192 "${canonical}"`);
       }
-      
-      // Check for similar tags
-      const similarTags = this.findSimilarTags(normalizedTag);
-      if (similarTags.length > 0) {
-        const bestMatch = similarTags[0].tag;
-        console.log(`🔀 Consolidating "${tag}" → "${bestMatch}"`);
-        processedTags.push(this.addTag(bestMatch, category));
-      } else {
-        processedTags.push(this.addTag(normalizedTag, category));
-      }
+
+      processed.push(this.addTag(canonical, category));
     }
-    
-    return processedTags.filter(Boolean);
+
+    return processed.filter(Boolean);
   }
 
   getPopularTags(limit = 10) {

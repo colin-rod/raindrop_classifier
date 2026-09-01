@@ -6,23 +6,42 @@ on:
     - cron: '0 3 * * 0'
   workflow_dispatch: # Allows manual trigger
 
+# The run mutates tag-registry.json, tag-metrics.json and tag-merge-log.json.
+# Without write access those files were rebuilt in the runner and thrown away
+# every week, so the classifier always started from a stale snapshot and the
+# merge history needed to revert a run never survived.
+permissions:
+  contents: write
+
+concurrency:
+  group: classify-bookmarks
+  cancel-in-progress: false
+
 jobs:
   classify:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
+
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '18'
         cache: 'npm'
-        
+
     - name: Install dependencies
       run: npm ci
-      
+
+    - name: Run unit tests
+      run: npm test
+
+    - name: Audit tag vocabulary (before)
+      run: node audit-tags.js
+      env:
+        RAINDROP_TOKEN: ${{ secrets.RAINDROP_TOKEN }}
+
     - name: Run bookmark classification
       run: node classify.js
       env:
@@ -34,3 +53,35 @@ jobs:
       env:
         RAINDROP_TOKEN: ${{ secrets.RAINDROP_TOKEN }}
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
+    - name: Commit tag state
+      # Runs even if cleanup failed, so a partial run's merge log is still
+      # recorded -- without it those merges would be unrevertable.
+      if: always()
+      run: |
+        git config user.name  "github-actions[bot]"
+        git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+        git add -- tag-registry.json tag-metrics.json tag-merge-log.json 2>/dev/null || true
+
+        if git diff --cached --quiet; then
+          echo "No tag state changes to commit."
+          exit 0
+        fi
+
+        git commit -m "chore: update tag registry and metrics [skip ci]"
+
+        # The scheduled job is the only writer, but a manual dispatch can race
+        # it; rebase rather than fail the run.
+        for attempt in 1 2 3; do
+          if git push; then
+            echo "Pushed tag state."
+            exit 0
+          fi
+          echo "Push failed (attempt $attempt), rebasing…"
+          git pull --rebase --autostash origin "${GITHUB_REF_NAME}" || true
+          sleep $((attempt * 5))
+        done
+
+        echo "::error::Could not push tag state after 3 attempts."
+        exit 1
