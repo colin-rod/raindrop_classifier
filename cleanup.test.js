@@ -8,11 +8,13 @@ import { sanitiseGroups, updateRegistry } from './tag-utils.js';
 const counts = new Map(Object.entries({
   crypto: 5, cryptocurrency: 5, 'crypto-industry': 2,
   movies: 8, marvel: 7, ai: 40,
-  art: 3, 'artificial-intelligence': 61,
+  // Real counts from the live vocabulary audit, not invented ones -- the
+  // art/artificial-intelligence margin is genuinely narrow (197 vs 275).
+  art: 197, 'artificial-intelligence': 275, ai: 48,
   video: 12, 'video-games': 30,
   security: 9, 'risk-management': 4,
-  'software-development': 15, software: 22,
-  'data-analytics': 18, 'data-analysis': 6,
+  'software-development': 116, software: 30,
+  'data-analytics': 225, 'data-analysis': 12,
 }));
 
 const syn = (canonical, variants, reason = 'same concept') =>
@@ -48,8 +50,9 @@ test('sanitise rejects a reason that describes a relationship', () => {
 });
 
 test('sanitise refuses to merge a more-used tag into a less-used one', () => {
-  // art(3) <- artificial-intelligence(61): a prefix match, and it would have
-  // retagged every AI bookmark as "art".
+  // art(197) <- artificial-intelligence(275): a prefix match that would have
+  // retagged 275 AI bookmarks as "art". Caught only because the counts run the
+  // safe way; a lexical rule cannot separate this from crypto/cryptocurrency.
   const { clean, rejected } = sanitiseGroups(
     [syn('art', ['artificial-intelligence'])],
     counts
