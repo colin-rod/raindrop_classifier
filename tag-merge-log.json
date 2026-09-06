@@ -1,0 +1,94 @@
+{
+  "runs": [
+    {
+      "runId": "2026-09-06T07-40-43-974Z",
+      "appliedAt": "2026-09-06T07:41:25.344Z",
+      "merges": [
+        {
+          "replace": "youtube-short",
+          "tags": [
+            "youtube-shorts"
+          ],
+          "reason": "identical after normalization"
+        },
+        {
+          "replace": "career-change",
+          "tags": [
+            "career-transition"
+          ],
+          "reason": "same concept"
+        },
+        {
+          "replace": "entertainment",
+          "tags": [
+            "entertainment-industry"
+          ],
+          "reason": "same concept"
+        },
+        {
+          "replace": "finance",
+          "tags": [
+            "financial-advice",
+            "financial-tools",
+            "financials"
+          ],
+          "reason": "all terms relate to financial concepts and tools"
+        },
+        {
+          "replace": "movies",
+          "tags": [
+            "film-analysis"
+          ],
+          "reason": "film analysis pertains to the study of movies"
+        },
+        {
+          "replace": "performance-art",
+          "tags": [
+            "live-performance"
+          ],
+          "reason": "live performance is a subset of performance art"
+        }
+      ],
+      "provenance": {
+        "live-performance": [
+          "1839343491"
+        ],
+        "youtube-shorts": [
+          "1834867211"
+        ],
+        "career-transition": [
+          "1834027442"
+        ],
+        "financial-advice": [
+          "1834002025"
+        ],
+        "entertainment-industry": [
+          "1827172509",
+          "1810536840",
+          "1798923162",
+          "1797471659"
+        ],
+        "film-analysis": [
+          "1822715944",
+          "1813719093",
+          "1810536840",
+          "1788706062"
+        ],
+        "financials": [
+          "1797467025",
+          "1784044119"
+        ],
+        "financial-tools": [
+          "1734803217",
+          "1734798177",
+          "1731288037",
+          "1729354788",
+          "1728140534",
+          "1724097552",
+          "1723991735",
+          "1722613366"
+        ]
+      }
+    }
+  ]
+}

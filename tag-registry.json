@@ -11,8 +11,8 @@
       ]
     },
     "ai": {
-      "category": "general",
-      "usageCount": 43,
+      "category": "AI & Technology",
+      "usageCount": 55,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "AI",
@@ -102,8 +102,8 @@
       ]
     },
     "animation": {
-      "category": "general",
-      "usageCount": 4,
+      "category": "Entertainment & Media",
+      "usageCount": 5,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "cartoon",
@@ -247,7 +247,7 @@
     },
     "buying": {
       "category": "Lifestyle & Practical",
-      "usageCount": 1,
+      "usageCount": 2,
       "firstUsed": "2025-09-01T11:37:42.988Z",
       "variants": []
     },
@@ -265,8 +265,8 @@
       ]
     },
     "career-development": {
-      "category": "general",
-      "usageCount": 7,
+      "category": "AI & Technology",
+      "usageCount": 13,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "personal development",
@@ -483,8 +483,8 @@
       ]
     },
     "dc-universe": {
-      "category": "general",
-      "usageCount": 2,
+      "category": "Entertainment & Media",
+      "usageCount": 3,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "DC Universe",
@@ -492,8 +492,8 @@
       ]
     },
     "decision-making": {
-      "category": "general",
-      "usageCount": 3,
+      "category": "Career & Professional Development",
+      "usageCount": 4,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "decision making",
@@ -603,14 +603,15 @@
       ]
     },
     "entertainment": {
-      "category": "general",
-      "usageCount": 4,
+      "category": "Entertainment & Media",
+      "usageCount": 291,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "Skyler Gisondo",
         "John Goodman",
         "SNL",
-        "audition"
+        "audition",
+        "entertainment-industry"
       ]
     },
     "ev-tax-credit": {
@@ -688,15 +689,18 @@
       ]
     },
     "finance": {
-      "category": "general",
-      "usageCount": 4,
+      "category": "Business & Startups",
+      "usageCount": 141,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "Finance",
         "holdings",
         "Profit",
         "business interests",
-        "savings analysis"
+        "savings analysis",
+        "financial-advice",
+        "financial-tools",
+        "financials"
       ]
     },
     "food-delivery": {
@@ -821,8 +825,8 @@
       ]
     },
     "history": {
-      "category": "general",
-      "usageCount": 2,
+      "category": "Global & Cultural",
+      "usageCount": 3,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "history",
@@ -839,7 +843,7 @@
     },
     "home-improvement": {
       "category": "Lifestyle & Practical",
-      "usageCount": 6,
+      "usageCount": 7,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "home improvement",
@@ -851,7 +855,7 @@
     },
     "housing": {
       "category": "Lifestyle & Practical",
-      "usageCount": 1,
+      "usageCount": 2,
       "firstUsed": "2025-09-01T11:37:42.979Z",
       "variants": []
     },
@@ -864,8 +868,8 @@
       ]
     },
     "humor": {
-      "category": "general",
-      "usageCount": 10,
+      "category": "Lifestyle & Practical",
+      "usageCount": 17,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "funny",
@@ -936,8 +940,8 @@
       ]
     },
     "job-market": {
-      "category": "general",
-      "usageCount": 7,
+      "category": "Business & Startups",
+      "usageCount": 10,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "job market",
@@ -1044,8 +1048,8 @@
       ]
     },
     "movies": {
-      "category": "general",
-      "usageCount": 8,
+      "category": "Entertainment & Media",
+      "usageCount": 10,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "movies",
@@ -1053,12 +1057,13 @@
         "superhero films",
         "historical drama",
         "movie credit scenes",
-        "shorts"
+        "shorts",
+        "film-analysis"
       ]
     },
     "music": {
-      "category": "general",
-      "usageCount": 2,
+      "category": "Entertainment & Media",
+      "usageCount": 5,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "rhythm",
@@ -1086,15 +1091,16 @@
       ]
     },
     "performance-art": {
-      "category": "general",
-      "usageCount": 7,
+      "category": "Entertainment & Media",
+      "usageCount": 6,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "music",
         "performance",
         "collaboration",
         "Comedy",
-        "Father Ted"
+        "Father Ted",
+        "live-performance"
       ]
     },
     "pilot-program": {
@@ -1131,8 +1137,8 @@
       ]
     },
     "privacy": {
-      "category": "general",
-      "usageCount": 1,
+      "category": "AI & Technology",
+      "usageCount": 2,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "privacy"
@@ -1257,8 +1263,8 @@
       ]
     },
     "social-media": {
-      "category": "general",
-      "usageCount": 4,
+      "category": "Entertainment & Media",
+      "usageCount": 5,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "TikTok",
@@ -1322,8 +1328,8 @@
       ]
     },
     "startup": {
-      "category": "general",
-      "usageCount": 4,
+      "category": "AI & Technology",
+      "usageCount": 8,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "college startups",
@@ -1369,8 +1375,8 @@
       ]
     },
     "sustainability": {
-      "category": "general",
-      "usageCount": 2,
+      "category": "Lifestyle & Practical",
+      "usageCount": 3,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "sustainability",
@@ -1404,8 +1410,8 @@
       ]
     },
     "technology": {
-      "category": "general",
-      "usageCount": 8,
+      "category": "AI & Technology",
+      "usageCount": 16,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "technology",
@@ -1452,8 +1458,8 @@
       ]
     },
     "tv-show": {
-      "category": "general",
-      "usageCount": 8,
+      "category": "Entertainment & Media",
+      "usageCount": 12,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "TV Show",
@@ -1484,8 +1490,8 @@
       ]
     },
     "venture-funding": {
-      "category": "general",
-      "usageCount": 8,
+      "category": "Business & Startups",
+      "usageCount": 15,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "venture capital",
@@ -1603,6 +1609,364 @@
       "variants": [
         "Xerox",
         "photocopy"
+      ]
+    },
+    "dog-care": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:38:30.847Z",
+      "variants": []
+    },
+    "performance-review": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:38:30.847Z",
+      "variants": []
+    },
+    "lifestyle": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 2,
+      "firstUsed": "2026-09-06T07:38:30.847Z",
+      "variants": []
+    },
+    "google": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:38:34.381Z",
+      "variants": []
+    },
+    "startup-pitches": {
+      "category": "Business & Startups",
+      "usageCount": 5,
+      "firstUsed": "2026-09-06T07:38:42.027Z",
+      "variants": []
+    },
+    "norway": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:38:45.155Z",
+      "variants": []
+    },
+    "monarchy": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:38:45.155Z",
+      "variants": []
+    },
+    "harald-v": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:38:45.155Z",
+      "variants": []
+    },
+    "haakon": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:38:45.155Z",
+      "variants": []
+    },
+    "virtual-assistant": {
+      "category": "AI & Technology",
+      "usageCount": 2,
+      "firstUsed": "2026-09-06T07:38:48.727Z",
+      "variants": []
+    },
+    "family-tech": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:38:48.727Z",
+      "variants": []
+    },
+    "video": {
+      "category": "Entertainment & Media",
+      "usageCount": 7,
+      "firstUsed": "2026-09-06T07:38:51.919Z",
+      "variants": []
+    },
+    "thinking-machines": {
+      "category": "Business & Startups",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:38:54.975Z",
+      "variants": []
+    },
+    "home-batteries": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:38:58.244Z",
+      "variants": []
+    },
+    "renewable-energy": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:38:58.244Z",
+      "variants": []
+    },
+    "tesla": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:38:58.244Z",
+      "variants": []
+    },
+    "product-management": {
+      "category": "Business & Startups",
+      "usageCount": 4,
+      "firstUsed": "2026-09-06T07:39:01.267Z",
+      "variants": []
+    },
+    "backlog-prioritization": {
+      "category": "Business & Startups",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:01.267Z",
+      "variants": []
+    },
+    "guide": {
+      "category": "Business & Startups",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:01.267Z",
+      "variants": []
+    },
+    "tutorial": {
+      "category": "Business & Startups",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:01.267Z",
+      "variants": []
+    },
+    "net-worth": {
+      "category": "Finance & Economics",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:04.493Z",
+      "variants": []
+    },
+    "personal-finance": {
+      "category": "Finance & Economics",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:04.493Z",
+      "variants": []
+    },
+    "economic-reflections": {
+      "category": "Finance & Economics",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:04.493Z",
+      "variants": []
+    },
+    "event-show": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:08.009Z",
+      "variants": []
+    },
+    "fun": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:08.009Z",
+      "variants": []
+    },
+    "bad-bunny": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:11.059Z",
+      "variants": []
+    },
+    "reggaeton": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:11.059Z",
+      "variants": []
+    },
+    "copyright": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:11.059Z",
+      "variants": []
+    },
+    "debi-mazar": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:17.423Z",
+      "variants": []
+    },
+    "birthed": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:17.423Z",
+      "variants": []
+    },
+    "method-acting": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:27.175Z",
+      "variants": []
+    },
+    "celebrity-culture": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:27.175Z",
+      "variants": []
+    },
+    "software": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:30.395Z",
+      "variants": []
+    },
+    "new-role": {
+      "category": "Career & Professional Development",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:33.371Z",
+      "variants": []
+    },
+    "cooking-hacks": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:36.324Z",
+      "variants": []
+    },
+    "viral-recipes": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:36.324Z",
+      "variants": []
+    },
+    "kitchen-tips": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:36.324Z",
+      "variants": []
+    },
+    "mindfulness": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:39.553Z",
+      "variants": []
+    },
+    "food": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:39.553Z",
+      "variants": []
+    },
+    "bluey": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:52.066Z",
+      "variants": []
+    },
+    "cultural-heritage": {
+      "category": "Global & Cultural",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:55.029Z",
+      "variants": []
+    },
+    "interview": {
+      "category": "Global & Cultural",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:55.029Z",
+      "variants": []
+    },
+    "narrative": {
+      "category": "Global & Cultural",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:39:55.029Z",
+      "variants": []
+    },
+    "meeting-notetaker": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:01.093Z",
+      "variants": []
+    },
+    "pricing-plans": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:01.093Z",
+      "variants": []
+    },
+    "tool": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:04.095Z",
+      "variants": []
+    },
+    "foldable-iphone": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:04.095Z",
+      "variants": []
+    },
+    "family-management": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:07.178Z",
+      "variants": []
+    },
+    "green-lantern": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:10.525Z",
+      "variants": []
+    },
+    "youtube-short": {
+      "category": "Entertainment & Media",
+      "usageCount": 2,
+      "firstUsed": "2026-09-06T07:40:16.691Z",
+      "variants": [
+        "youtube-shorts"
+      ]
+    },
+    "comedyshorts": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:19.919Z",
+      "variants": []
+    },
+    "glow-up": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:19.919Z",
+      "variants": []
+    },
+    "tiny-desk-concert": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:22.899Z",
+      "variants": []
+    },
+    "live-events": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:26.111Z",
+      "variants": []
+    },
+    "concerts": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:26.111Z",
+      "variants": []
+    },
+    "lawsuit": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:26.111Z",
+      "variants": []
+    },
+    "cancer-awareness": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:32.455Z",
+      "variants": []
+    },
+    "internet-culture": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-06T07:40:32.455Z",
+      "variants": []
+    },
+    "career-change": {
+      "category": "Entertainment & Media",
+      "usageCount": 309,
+      "firstUsed": "2026-09-06T07:41:25.092Z",
+      "variants": [
+        "career-transition"
       ]
     }
   },
@@ -2005,7 +2369,15 @@
     "youth issues": "parenting",
     "YouTube": "humor",
     "Zoe Kravitz": "actors",
-    "Zuckerberg": "leadership-restructuring"
+    "Zuckerberg": "leadership-restructuring",
+    "youtube-shorts": "youtube-short",
+    "career-transition": "career-change",
+    "entertainment-industry": "entertainment",
+    "financial-advice": "finance",
+    "financial-tools": "finance",
+    "financials": "finance",
+    "film-analysis": "movies",
+    "live-performance": "performance-art"
   },
-  "lastUpdated": "2026-09-01T13:24:06.751Z"
+  "lastUpdated": "2026-09-06T07:41:25.092Z"
 }
