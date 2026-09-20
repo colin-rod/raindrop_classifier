@@ -74,8 +74,8 @@
       ]
     },
     "amazon": {
-      "category": "general",
-      "usageCount": 2,
+      "category": "Entertainment & Media",
+      "usageCount": 3,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "Jeff Bezos",
@@ -210,7 +210,7 @@
     },
     "business-strategy": {
       "category": "Business & Startups",
-      "usageCount": 5,
+      "usageCount": 8,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "business strategy",
@@ -527,8 +527,8 @@
       ]
     },
     "education": {
-      "category": "general",
-      "usageCount": 3,
+      "category": "AI & Technology",
+      "usageCount": 4,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "education",
@@ -557,7 +557,7 @@
     },
     "entertainment": {
       "category": "Entertainment & Media",
-      "usageCount": 306,
+      "usageCount": 323,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "Skyler Gisondo",
@@ -621,8 +621,8 @@
       ]
     },
     "film-industry": {
-      "category": "general",
-      "usageCount": 3,
+      "category": "AI & Technology",
+      "usageCount": 4,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "Film Industry",
@@ -643,7 +643,7 @@
     },
     "finance": {
       "category": "Business & Startups",
-      "usageCount": 146,
+      "usageCount": 149,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "Finance",
@@ -779,7 +779,7 @@
     },
     "history": {
       "category": "Global & Cultural",
-      "usageCount": 3,
+      "usageCount": 4,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "history",
@@ -796,7 +796,7 @@
     },
     "home-improvement": {
       "category": "Lifestyle & Practical",
-      "usageCount": 7,
+      "usageCount": 9,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "home improvement",
@@ -822,7 +822,7 @@
     },
     "humor": {
       "category": "Lifestyle & Practical",
-      "usageCount": 20,
+      "usageCount": 22,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "funny",
@@ -894,7 +894,7 @@
     },
     "job-market": {
       "category": "Business & Startups",
-      "usageCount": 10,
+      "usageCount": 11,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "job market",
@@ -1002,7 +1002,7 @@
     },
     "movies": {
       "category": "Entertainment & Media",
-      "usageCount": 14,
+      "usageCount": 18,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "movies",
@@ -1016,7 +1016,7 @@
     },
     "music": {
       "category": "Entertainment & Media",
-      "usageCount": 116,
+      "usageCount": 121,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "rhythm",
@@ -1047,7 +1047,7 @@
     },
     "performance-art": {
       "category": "Entertainment & Media",
-      "usageCount": 11,
+      "usageCount": 14,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "music",
@@ -1083,8 +1083,8 @@
       ]
     },
     "politics": {
-      "category": "general",
-      "usageCount": 2,
+      "category": "Politics & Current Affairs",
+      "usageCount": 5,
       "firstUsed": "2025-09-01T11:28:44.802Z",
       "variants": [
         "Trump administration",
@@ -1219,7 +1219,7 @@
     },
     "social-media": {
       "category": "Entertainment & Media",
-      "usageCount": 5,
+      "usageCount": 6,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "TikTok",
@@ -1271,15 +1271,17 @@
       ]
     },
     "sports": {
-      "category": "general",
-      "usageCount": 6,
+      "category": "Entertainment & Media",
+      "usageCount": 9,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "Pro Kabaddi League",
         "sports",
         "viewership",
         "women's football",
-        "international tournaments"
+        "international tournaments",
+        "sports-culture",
+        "sports-politics"
       ]
     },
     "startup": {
@@ -1294,8 +1296,8 @@
       ]
     },
     "superheroes": {
-      "category": "general",
-      "usageCount": 4,
+      "category": "Entertainment & Media",
+      "usageCount": 6,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "comics",
@@ -1305,8 +1307,8 @@
       ]
     },
     "superman-universe": {
-      "category": "general",
-      "usageCount": 6,
+      "category": "Entertainment & Media",
+      "usageCount": 7,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "Jimmy Olsen",
@@ -1353,26 +1355,20 @@
         "monopoly money"
       ]
     },
-    "tech-news": {
-      "category": "AI & Technology",
-      "usageCount": 10,
-      "firstUsed": "2025-09-01T11:28:44.802Z",
-      "variants": [
-        "tech news",
-        "Valuation",
-        "acquisition",
-        "Leadership Changes"
-      ]
-    },
     "technology": {
       "category": "AI & Technology",
-      "usageCount": 22,
+      "usageCount": 790,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "technology",
         "Technology Impact",
         "tech companies",
-        "AI startups"
+        "AI startups",
+        "tech-billionaires",
+        "technology-impact",
+        "technology-use",
+        "tech-news",
+        "tech-communities"
       ]
     },
     "technology-advancements": {
@@ -1414,7 +1410,7 @@
     },
     "tv-show": {
       "category": "Entertainment & Media",
-      "usageCount": 18,
+      "usageCount": 27,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "TV Show",
@@ -1446,7 +1442,7 @@
     },
     "venture-funding": {
       "category": "Business & Startups",
-      "usageCount": 22,
+      "usageCount": 25,
       "firstUsed": "2025-09-01T11:28:44.801Z",
       "variants": [
         "venture capital",
@@ -1580,7 +1576,7 @@
     },
     "lifestyle": {
       "category": "Lifestyle & Practical",
-      "usageCount": 6,
+      "usageCount": 7,
       "firstUsed": "2026-09-06T07:38:30.847Z",
       "variants": []
     },
@@ -1592,7 +1588,7 @@
     },
     "startup-pitches": {
       "category": "Business & Startups",
-      "usageCount": 10,
+      "usageCount": 11,
       "firstUsed": "2026-09-06T07:38:42.027Z",
       "variants": []
     },
@@ -1622,7 +1618,7 @@
     },
     "virtual-assistant": {
       "category": "AI & Technology",
-      "usageCount": 3,
+      "usageCount": 4,
       "firstUsed": "2026-09-06T07:38:48.727Z",
       "variants": []
     },
@@ -1634,7 +1630,7 @@
     },
     "video": {
       "category": "Entertainment & Media",
-      "usageCount": 10,
+      "usageCount": 22,
       "firstUsed": "2026-09-06T07:38:51.919Z",
       "variants": []
     },
@@ -1682,7 +1678,7 @@
     },
     "tutorial": {
       "category": "Business & Startups",
-      "usageCount": 4,
+      "usageCount": 5,
       "firstUsed": "2026-09-06T07:39:01.267Z",
       "variants": []
     },
@@ -1754,7 +1750,7 @@
     },
     "celebrity-culture": {
       "category": "Entertainment & Media",
-      "usageCount": 1,
+      "usageCount": 3,
       "firstUsed": "2026-09-06T07:39:27.175Z",
       "variants": []
     },
@@ -1766,7 +1762,7 @@
     },
     "new-role": {
       "category": "Career & Professional Development",
-      "usageCount": 1,
+      "usageCount": 2,
       "firstUsed": "2026-09-06T07:39:33.371Z",
       "variants": []
     },
@@ -1790,7 +1786,7 @@
     },
     "food": {
       "category": "Lifestyle & Practical",
-      "usageCount": 146,
+      "usageCount": 147,
       "firstUsed": "2026-09-06T07:39:39.553Z",
       "variants": [
         "cooking",
@@ -1841,7 +1837,7 @@
     },
     "tool": {
       "category": "AI & Technology",
-      "usageCount": 5,
+      "usageCount": 9,
       "firstUsed": "2026-09-06T07:40:04.095Z",
       "variants": []
     },
@@ -1865,7 +1861,7 @@
     },
     "youtube-short": {
       "category": "Entertainment & Media",
-      "usageCount": 2,
+      "usageCount": 4,
       "firstUsed": "2026-09-06T07:40:16.691Z",
       "variants": [
         "youtube-shorts"
@@ -1915,7 +1911,7 @@
     },
     "career-change": {
       "category": "Entertainment & Media",
-      "usageCount": 323,
+      "usageCount": 324,
       "firstUsed": "2026-09-06T07:41:25.092Z",
       "variants": [
         "career-transition",
@@ -2037,12 +2033,6 @@
       "firstUsed": "2026-09-13T08:00:41.882Z",
       "variants": []
     },
-    "travel-experience": {
-      "category": "Global & Cultural",
-      "usageCount": 1,
-      "firstUsed": "2026-09-13T08:00:45.568Z",
-      "variants": []
-    },
     "international-supermarkets": {
       "category": "Global & Cultural",
       "usageCount": 1,
@@ -2123,13 +2113,13 @@
     },
     "golf": {
       "category": "Sports & Current Affairs",
-      "usageCount": 1,
+      "usageCount": 2,
       "firstUsed": "2026-09-13T08:01:27.228Z",
       "variants": []
     },
     "liv-golf": {
       "category": "Sports & Current Affairs",
-      "usageCount": 1,
+      "usageCount": 2,
       "firstUsed": "2026-09-13T08:01:27.228Z",
       "variants": []
     },
@@ -2141,7 +2131,7 @@
     },
     "sports-business": {
       "category": "Sports & Current Affairs",
-      "usageCount": 1,
+      "usageCount": 2,
       "firstUsed": "2026-09-13T08:01:27.228Z",
       "variants": []
     },
@@ -2366,6 +2356,402 @@
       "variants": [
         "data-analysis"
       ]
+    },
+    "security-audit": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:18.345Z",
+      "variants": []
+    },
+    "machine-readable": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:18.345Z",
+      "variants": []
+    },
+    "coding-agent": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:18.345Z",
+      "variants": []
+    },
+    "sleep-technology": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:22.589Z",
+      "variants": []
+    },
+    "ed-brubaker": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:25.978Z",
+      "variants": []
+    },
+    "security": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:28.958Z",
+      "variants": []
+    },
+    "hackers": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:28.958Z",
+      "variants": []
+    },
+    "dyson": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:36.090Z",
+      "variants": []
+    },
+    "robovac": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:36.090Z",
+      "variants": []
+    },
+    "vacuum-cleaner": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:36.091Z",
+      "variants": []
+    },
+    "tom-cruise": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:39.164Z",
+      "variants": []
+    },
+    "pork-belly": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:42.442Z",
+      "variants": []
+    },
+    "current-affairs": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:45.525Z",
+      "variants": []
+    },
+    "legalization": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:45.525Z",
+      "variants": []
+    },
+    "zack-snyder": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:17:54.535Z",
+      "variants": []
+    },
+    "bangkokcity": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:03.546Z",
+      "variants": []
+    },
+    "nightwalk": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:03.546Z",
+      "variants": []
+    },
+    "travel": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 13,
+      "firstUsed": "2026-09-20T08:18:03.546Z",
+      "variants": [
+        "travel-experience",
+        "travel-planning",
+        "travel-tech"
+      ]
+    },
+    "scandal": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:06.697Z",
+      "variants": []
+    },
+    "religion": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:06.697Z",
+      "variants": []
+    },
+    "germany": {
+      "category": "Business & Startups",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:09.791Z",
+      "variants": []
+    },
+    "business-impact": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:12.945Z",
+      "variants": []
+    },
+    "2024-election": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:15.852Z",
+      "variants": []
+    },
+    "south-park": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:22.052Z",
+      "variants": []
+    },
+    "kendrick-lamar": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:22.052Z",
+      "variants": []
+    },
+    "corporate-layoffs": {
+      "category": "Business & Startups",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:28.292Z",
+      "variants": []
+    },
+    "high-protein": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:34.378Z",
+      "variants": []
+    },
+    "healthy-food": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:34.379Z",
+      "variants": []
+    },
+    "productivity": {
+      "category": "Business & Startups",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:37.380Z",
+      "variants": []
+    },
+    "fan-theory": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:40.778Z",
+      "variants": []
+    },
+    "neobrutalism": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:43.966Z",
+      "variants": []
+    },
+    "web-development": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:43.966Z",
+      "variants": []
+    },
+    "ui-components": {
+      "category": "AI & Technology",
+      "usageCount": 2,
+      "firstUsed": "2026-09-20T08:18:43.966Z",
+      "variants": [
+        "ui-transitions"
+      ]
+    },
+    "flights": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:47.012Z",
+      "variants": []
+    },
+    "holiday": {
+      "category": "Lifestyle & Practical",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:47.012Z",
+      "variants": []
+    },
+    "fashion-app": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:49.886Z",
+      "variants": []
+    },
+    "shoppable-results": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:49.886Z",
+      "variants": []
+    },
+    "web-apps": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:52.932Z",
+      "variants": []
+    },
+    "content-creator": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:55.908Z",
+      "variants": []
+    },
+    "warhammer-40k": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:18:55.908Z",
+      "variants": []
+    },
+    "hal-jordan": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:05.859Z",
+      "variants": []
+    },
+    "john-stewart": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:05.859Z",
+      "variants": []
+    },
+    "lanterns": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:08.830Z",
+      "variants": []
+    },
+    "recap": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:08.830Z",
+      "variants": []
+    },
+    "cheating": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:11.867Z",
+      "variants": []
+    },
+    "robotics": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:14.652Z",
+      "variants": []
+    },
+    "robot-vacuums": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:14.652Z",
+      "variants": []
+    },
+    "innovation": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:14.652Z",
+      "variants": []
+    },
+    "wheel-of-fortune": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:17.673Z",
+      "variants": []
+    },
+    "jim-thornton": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:17.673Z",
+      "variants": []
+    },
+    "wedding": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:20.732Z",
+      "variants": []
+    },
+    "j-balvin": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:23.508Z",
+      "variants": []
+    },
+    "karol-g": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:23.508Z",
+      "variants": []
+    },
+    "spanish-language-artists": {
+      "category": "Entertainment & Media",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:23.508Z",
+      "variants": []
+    },
+    "web-design": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:26.537Z",
+      "variants": []
+    },
+    "user-experience": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:26.537Z",
+      "variants": []
+    },
+    "frontend": {
+      "category": "AI & Technology",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:26.537Z",
+      "variants": []
+    },
+    "extreme-wealth": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:29.723Z",
+      "variants": []
+    },
+    "neoliberalism": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:29.723Z",
+      "variants": []
+    },
+    "climate-change": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:29.723Z",
+      "variants": []
+    },
+    "power-dynamics": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:29.723Z",
+      "variants": []
+    },
+    "engineering-management": {
+      "category": "Career & Professional Development",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:33.115Z",
+      "variants": []
+    },
+    "housing-crisis": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:36.414Z",
+      "variants": []
+    },
+    "urban-development": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:36.415Z",
+      "variants": []
+    },
+    "vacant-properties": {
+      "category": "Politics & Current Affairs",
+      "usageCount": 1,
+      "firstUsed": "2026-09-20T08:19:36.415Z",
+      "variants": []
     }
   },
   "aliases": {
@@ -2792,7 +3178,18 @@
     "live-music": "music",
     "music-review": "music",
     "business-registration": "business-strategy",
-    "business-ethics": "business-strategy"
+    "business-ethics": "business-strategy",
+    "travel-experience": "travel",
+    "travel-planning": "travel",
+    "travel-tech": "travel",
+    "sports-culture": "sports",
+    "sports-politics": "sports",
+    "tech-billionaires": "technology",
+    "technology-impact": "technology",
+    "technology-use": "technology",
+    "tech-news": "technology",
+    "tech-communities": "technology",
+    "ui-transitions": "ui-components"
   },
-  "lastUpdated": "2026-09-13T08:03:45.808Z"
+  "lastUpdated": "2026-09-20T08:20:27.588Z"
 }

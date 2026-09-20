@@ -348,6 +348,100 @@
           "1661775848"
         ]
       }
+    },
+    {
+      "runId": "2026-09-20T08-19-49-206Z",
+      "appliedAt": "2026-09-20T08:20:28.284Z",
+      "merges": [
+        {
+          "replace": "travel",
+          "tags": [
+            "travel-experience",
+            "travel-planning",
+            "travel-tech"
+          ],
+          "reason": "subtopics of travel"
+        },
+        {
+          "replace": "sports",
+          "tags": [
+            "sports-culture",
+            "sports-politics"
+          ],
+          "reason": "subtopics of sports"
+        },
+        {
+          "replace": "technology",
+          "tags": [
+            "tech-billionaires",
+            "technology-impact",
+            "technology-use",
+            "tech-news",
+            "tech-communities"
+          ],
+          "reason": "subtopics of technology"
+        },
+        {
+          "replace": "ui-components",
+          "tags": [
+            "ui-transitions"
+          ],
+          "reason": "subtopics of UI concepts"
+        }
+      ],
+      "provenance": {
+        "tech-news": [
+          "1858797835",
+          "1856376174",
+          "1849671884",
+          "1848690772",
+          "1848656774",
+          "1846978869",
+          "1845947716",
+          "1845608958"
+        ],
+        "ui-transitions": [
+          "1853546891"
+        ],
+        "tech-billionaires": [
+          "1851963539"
+        ],
+        "travel-experience": [
+          "1850850499"
+        ],
+        "sports-politics": [
+          "1831885234",
+          "1789797981"
+        ],
+        "travel-tech": [
+          "1812512000"
+        ],
+        "travel-planning": [
+          "1810545871"
+        ],
+        "technology-use": [
+          "1799580448"
+        ],
+        "sports-culture": [
+          "1789797981"
+        ],
+        "technology-impact": [
+          "1756819494",
+          "1693245473",
+          "1679134230",
+          "1676185982",
+          "1666371310",
+          "1640450027",
+          "1634802798"
+        ],
+        "tech-communities": [
+          "1622521078",
+          "1582971313",
+          "1563980660",
+          "1527199671",
+          "1429833586"
+        ]
+      }
     }
   ]
 }
