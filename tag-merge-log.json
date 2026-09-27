@@ -442,6 +442,24 @@
           "1429833586"
         ]
       }
+    },
+    {
+      "runId": "2026-09-27T08-57-41-462Z",
+      "appliedAt": "2026-09-27T08:58:17.222Z",
+      "merges": [
+        {
+          "replace": "data-privacy",
+          "tags": [
+            "digital-privacy"
+          ],
+          "reason": "same concept"
+        }
+      ],
+      "provenance": {
+        "digital-privacy": [
+          "1823699472"
+        ]
+      }
     }
   ]
 }
