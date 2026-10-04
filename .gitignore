@@ -1,2 +1,8 @@
 node_modules
 .env
+library-export.json
+reorg-plan.json
+reorg-cache.json
+reorg-summary.md
+reorg-apply-*.json
+reorg-revert-failures-*.json
